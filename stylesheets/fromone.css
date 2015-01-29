@@ -1,0 +1,184 @@
+/* 常量 */
+/*基础样式*/
+body {
+  font-family: Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+a:hover,
+a:active,
+a:link {
+  text-decoration: none;
+}
+/* 前方蒙版 */
+.full-screen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  display: none;
+}
+.full-screen > li {
+  width: 100%;
+  height: 10%;
+  background-repeat: no-repeat;
+  background-size: 100% 1100%;
+  -webkit-transition: 400ms;
+          transition: 400ms;
+  -webkit-transform: rotateX(90deg);
+          transform: rotateX(90deg);
+}
+.full-screen > li:nth-child(1) {
+  background-position: 0 0;
+  -webkit-transition-delay: 130ms;
+          transition-delay: 130ms;
+}
+.full-screen > li:nth-child(2) {
+  background-position: 0 10%;
+  -webkit-transition-delay: 260ms;
+          transition-delay: 260ms;
+}
+.full-screen > li:nth-child(3) {
+  background-position: 0 20%;
+  -webkit-transition-delay: 390ms;
+          transition-delay: 390ms;
+}
+.full-screen > li:nth-child(4) {
+  background-position: 0 30%;
+  -webkit-transition-delay: 520ms;
+          transition-delay: 520ms;
+}
+.full-screen > li:nth-child(5) {
+  background-position: 0 40%;
+  -webkit-transition-delay: 650ms;
+          transition-delay: 650ms;
+}
+.full-screen > li:nth-child(6) {
+  background-position: 0 50%;
+  -webkit-transition-delay: 780ms;
+          transition-delay: 780ms;
+}
+.full-screen > li:nth-child(7) {
+  background-position: 0 60%;
+  -webkit-transition-delay: 910ms;
+          transition-delay: 910ms;
+}
+.full-screen > li:nth-child(8) {
+  background-position: 0 70%;
+  -webkit-transition-delay: 1040ms;
+          transition-delay: 1040ms;
+}
+.full-screen > li:nth-child(9) {
+  background-position: 0 80%;
+  -webkit-transition-delay: 1170ms;
+          transition-delay: 1170ms;
+}
+.full-screen > li:nth-child(10) {
+  background-position: 0 90%;
+  -webkit-transition-delay: 1300ms;
+          transition-delay: 1300ms;
+}
+.full-screen.current > li {
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none;
+}
+/* index-area 样式 */
+.index-header {
+  width: 1200px;
+  margin: 20px auto 0;
+  text-align: center;
+}
+.index-header > * {
+  float: left;
+  margin-right: 28px;
+  border-radius: 50%;
+}
+.index-logo {
+  width: 200px;
+  height: 200px;
+  padding-top: 38px;
+  font-size: 46px;
+  font-weight: 700;
+  color: #666;
+  text-shadow: 2px 2px 0 #fff, 4px 4px 0 #666;
+  background: #fff;
+  box-shadow: 0 0 15px #333;
+}
+.index-logo:hover {
+  color: #666;
+}
+.index-nav {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  margin-top: 20px;
+  font-size: 28px;
+  line-height: 130px;
+  color: #fff;
+  cursor: pointer;
+}
+.index-nav:before {
+  position: absolute;
+  display: block;
+  width: 90%;
+  height: 90%;
+  margin: 5%;
+  content: "";
+  border: 0;
+  border: 4px solid transparent;
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  -webkit-transition: .5s;
+          transition: .5s;
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.index-nav:hover {
+  color: #fff;
+}
+.index-nav:hover:before {
+  -webkit-transform: rotate(135deg);
+      -ms-transform: rotate(135deg);
+          transform: rotate(135deg);
+}
+.index-nav:visited,
+.index-nav:link {
+  color: #fff;
+}
+.index-nav-01 {
+  background: #e74c3c;
+}
+.index-nav-02 {
+  background: #f39c12;
+}
+.index-nav-03 {
+  background: #1abc9c;
+}
+.index-nav-04 {
+  background: #3498db;
+}
+.index-nav-05 {
+  background: #8e44ad;
+}
+.index-nav-06 {
+  background: #2c3e50;
+}
+/* top-area */
+.top-screen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: none;
+}
+/* essay 效果 */
+.essay .full-screen > li {
+  background-color: #1abc9c;
+  background-image: none;
+}

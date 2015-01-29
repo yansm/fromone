@@ -1,0 +1,14 @@
+/*
+ * 系统通用css
+ */
+i, em {
+  font-style: normal;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+mark {
+  background: none;
+}

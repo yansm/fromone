@@ -145,10 +145,6 @@ a:link {
       -ms-transform: rotate(135deg);
           transform: rotate(135deg);
 }
-.index-nav:visited,
-.index-nav:link {
-  color: #fff;
-}
 .index-nav-01 {
   background: #e74c3c;
 }
@@ -181,4 +177,187 @@ a:link {
 .essay .full-screen > li {
   background-color: #1abc9c;
   background-image: none;
+}
+.essay-area {
+  width: 200%;
+  height: 100%;
+}
+.essay-main {
+  float: left;
+  width: 50%;
+  height: 100%;
+  padding-top: 120px;
+}
+.essay-main-box {
+  width: 980px;
+  min-height: 100%;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 0 30px #555;
+  -webkit-transition: .5s;
+          transition: .5s;
+  -webkit-transform: translateY(100%);
+      -ms-transform: translateY(100%);
+          transform: translateY(100%);
+}
+.essay-main-banner {
+  width: 100%;
+  height: 300px;
+  background: url(../images/essay-banner.jpg) no-repeat;
+  background-size: cover;
+}
+.essay-main-menus {
+  height: 100px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+.essay-main-menus > li:not(.home-btn) {
+  display: inline-block;
+  height: 70px;
+  padding: 0 5px;
+  margin: 15px 20px;
+  font-size: 22px;
+  line-height: 70px;
+  color: #999;
+  vertical-align: top;
+  cursor: pointer;
+  border-bottom: 4px solid transparent;
+  -webkit-transition: .5s;
+          transition: .5s;
+}
+.essay-main-menus > li:not(.home-btn).current {
+  color: #1abc9c;
+  border-bottom: 4px solid #999;
+}
+.essay-main-menus > li:not(.home-btn):hover {
+  border-bottom: 4px solid #999;
+}
+.essay-main-menus .home-btn {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  margin-top: 0;
+  cursor: pointer;
+  -webkit-transform: translateY(-70px);
+      -ms-transform: translateY(-70px);
+          transform: translateY(-70px);
+  /* 主菜单变形 */
+}
+.essay-main-menus .home-btn .index-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: 36px;
+  line-height: 200px;
+  color: #fff;
+  background: #1abc9c;
+  border: 4px solid #fff;
+  border-radius: 50%;
+}
+.essay-main-menus .home-btn .index-btn:before,
+.essay-main-menus .home-btn .index-btn:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "随笔";
+  opacity: 1;
+  -webkit-transition: .5s;
+          transition: .5s;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+}
+.essay-main-menus .home-btn .index-btn:after {
+  content: "返回";
+  opacity: 0;
+  -webkit-transform: scale(2);
+      -ms-transform: scale(2);
+          transform: scale(2);
+}
+.essay-main-menus .home-btn .index-btn:hover:before {
+  opacity: 0;
+  -webkit-transform: scale(2);
+      -ms-transform: scale(2);
+          transform: scale(2);
+}
+.essay-main-menus .home-btn .index-btn:hover:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+}
+.essay-main-menus .home-btn .index-logo {
+  display: none;
+}
+.essay-main-menus .home-btn .index-nav-03 {
+  display: none;
+}
+.essay-main-menus .home-btn .index-header > * {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  margin: -40px 0 0 -40px;
+  font-size: 22px;
+  line-height: 80px;
+  -webkit-transition: .3s;
+          transition: .3s;
+}
+.essay-main-menus .home-btn .index-nav-01 {
+  -webkit-transition-delay: .3s;
+          transition-delay: .3s;
+}
+.essay-main-menus .home-btn .index-nav-02 {
+  -webkit-transition-delay: .4s;
+          transition-delay: .4s;
+}
+.essay-main-menus .home-btn .index-nav-04 {
+  -webkit-transition-delay: .5s;
+          transition-delay: .5s;
+}
+.essay-main-menus .home-btn .index-nav-05 {
+  -webkit-transition-delay: .6s;
+          transition-delay: .6s;
+}
+.essay-main-menus .home-btn .index-nav-06 {
+  -webkit-transition-delay: .7s;
+          transition-delay: .7s;
+}
+.essay-main-menus .home-btn:hover .index-nav-01 {
+  -webkit-transform: translate(-168px, -71px);
+      -ms-transform: translate(-168px, -71px);
+          transform: translate(-168px, -71px);
+}
+.essay-main-menus .home-btn:hover .index-nav-02 {
+  -webkit-transform: translate(-103px, -138px);
+      -ms-transform: translate(-103px, -138px);
+          transform: translate(-103px, -138px);
+}
+.essay-main-menus .home-btn:hover .index-nav-04 {
+  -webkit-transform: translate(0, -160px);
+      -ms-transform: translate(0, -160px);
+          transform: translate(0, -160px);
+}
+.essay-main-menus .home-btn:hover .index-nav-05 {
+  -webkit-transform: translate(103px, -138px);
+      -ms-transform: translate(103px, -138px);
+          transform: translate(103px, -138px);
+}
+.essay-main-menus .home-btn:hover .index-nav-06 {
+  -webkit-transform: translate(168px, -71px);
+      -ms-transform: translate(168px, -71px);
+          transform: translate(168px, -71px);
+}
+.current.essay-area .essay-main-box {
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0);
 }

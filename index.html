@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />  
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>myFirstPage</title> 
+		<title>fromone | my first blog</title> 
 		<!--[if IE]>
 		<script type="text/javascript" src="./lib/html5.js"></script>
 		<style>
@@ -20,14 +20,15 @@
 	<body>  
 		<!-- index menus -->
 		<header class="index-header">
-	<div class="index-logo" click-target="change-btn">from<br>one</div>
+	<div class="index-logo" click-target="change-btn">from one <aside></aside></div>
 	<div class="index-nav index-nav-01">js</div>
-	<div class="index-nav index-nav-02">css</div>
+	<div class="index-nav index-nav-02" click-target="change-btn" data-level="1" data-type="bottom" data-model="css">css</div>
 	<div class="index-nav index-nav-03" click-target="change-btn" data-level="1" data-type="top" data-model="essay">随笔</div>
 	<div class="index-nav index-nav-04">短语</div>
 	<div class="index-nav index-nav-05">相册</div>
 	<div class="index-nav index-nav-06">about</div>
 </header>
+		<div class="bottom-screen"></div>
 		<ul class="full-screen">
 			<li></li>
 			<li></li>
@@ -43,6 +44,7 @@
 		<div class="top-screen"></div>
 	</body>
 	<script src="./lib/jquery-1.10.2.min.js"></script>
+	<script src="http://yansm.github.io/fromzero/lib/myDatas.js"></script>
 	<script src="./lib/bootstrap/js/bootstrap.js"></script>
 	<script src="./lib/fromone.debug.js"></script>	
 </html>

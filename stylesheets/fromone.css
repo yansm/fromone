@@ -24,7 +24,7 @@ a:link {
   width: 100%;
   height: 10%;
   background-repeat: no-repeat;
-  background-size: 100% 1100%;
+  background-size: 100% 1000%;
   -webkit-transition: 400ms;
           transition: 400ms;
   -webkit-transform: rotateX(90deg);
@@ -32,58 +32,70 @@ a:link {
 }
 .full-screen > li:nth-child(1) {
   background-position: 0 0;
-  -webkit-transition-delay: 130ms;
-          transition-delay: 130ms;
+  -webkit-transition-delay: 100ms;
+          transition-delay: 100ms;
 }
 .full-screen > li:nth-child(2) {
-  background-position: 0 10%;
-  -webkit-transition-delay: 260ms;
-          transition-delay: 260ms;
+  background-position: 0 11.1%;
+  -webkit-transition-delay: 200ms;
+          transition-delay: 200ms;
 }
 .full-screen > li:nth-child(3) {
-  background-position: 0 20%;
-  -webkit-transition-delay: 390ms;
-          transition-delay: 390ms;
+  background-position: 0 22.2%;
+  -webkit-transition-delay: 300ms;
+          transition-delay: 300ms;
 }
 .full-screen > li:nth-child(4) {
-  background-position: 0 30%;
-  -webkit-transition-delay: 520ms;
-          transition-delay: 520ms;
+  background-position: 0 33.3%;
+  -webkit-transition-delay: 400ms;
+          transition-delay: 400ms;
 }
 .full-screen > li:nth-child(5) {
-  background-position: 0 40%;
-  -webkit-transition-delay: 650ms;
-          transition-delay: 650ms;
+  background-position: 0 44.4%;
+  -webkit-transition-delay: 500ms;
+          transition-delay: 500ms;
 }
 .full-screen > li:nth-child(6) {
-  background-position: 0 50%;
-  -webkit-transition-delay: 780ms;
-          transition-delay: 780ms;
+  background-position: 0 55.5%;
+  -webkit-transition-delay: 600ms;
+          transition-delay: 600ms;
 }
 .full-screen > li:nth-child(7) {
-  background-position: 0 60%;
-  -webkit-transition-delay: 910ms;
-          transition-delay: 910ms;
+  background-position: 0 66.6%;
+  -webkit-transition-delay: 700ms;
+          transition-delay: 700ms;
 }
 .full-screen > li:nth-child(8) {
-  background-position: 0 70%;
-  -webkit-transition-delay: 1040ms;
-          transition-delay: 1040ms;
+  background-position: 0 77.7%;
+  -webkit-transition-delay: 800ms;
+          transition-delay: 800ms;
 }
 .full-screen > li:nth-child(9) {
-  background-position: 0 80%;
-  -webkit-transition-delay: 1170ms;
-          transition-delay: 1170ms;
+  background-position: 0 88.8%;
+  -webkit-transition-delay: 900ms;
+          transition-delay: 900ms;
 }
 .full-screen > li:nth-child(10) {
-  background-position: 0 90%;
-  -webkit-transition-delay: 1300ms;
-          transition-delay: 1300ms;
+  background-position: 0 99.9%;
+  -webkit-transition-delay: 1000ms;
+          transition-delay: 1000ms;
 }
 .full-screen.current > li {
   -webkit-transform: none;
       -ms-transform: none;
           transform: none;
+}
+.full-screen.essay > li {
+  background-color: #1abc9c;
+  background-image: none;
+}
+.full-screen.css > li {
+  background-color: #f39c12;
+  background-image: url(../images/css-background.jpg);
+}
+.full-screen.index > li {
+  background-color: #f39c12;
+  background-image: url(../images/index-background.jpg);
 }
 /* index-area 样式 */
 .index-header {
@@ -99,7 +111,7 @@ a:link {
 .index-logo {
   width: 200px;
   height: 200px;
-  padding-top: 38px;
+  padding: 38px;
   font-size: 46px;
   font-weight: 700;
   color: #666;
@@ -163,8 +175,9 @@ a:link {
 .index-nav-06 {
   background: #2c3e50;
 }
-/* top-area */
-.top-screen {
+/* top-area & bottom-area */
+.top-screen,
+.bottom-screen {
   position: fixed;
   top: 0;
   right: 0;
@@ -173,20 +186,19 @@ a:link {
   z-index: 1000;
   display: none;
 }
-/* essay 效果 */
-.essay .full-screen > li {
-  background-color: #1abc9c;
-  background-image: none;
+.bottom-screen {
+  z-index: 900;
 }
+/* essay 效果 */
 .essay-area {
-  width: 200%;
+  width: 100%;
   height: 100%;
 }
 .essay-main {
   float: left;
-  width: 50%;
+  width: 100%;
   height: 100%;
-  padding-top: 120px;
+  padding-top: 80px;
 }
 .essay-main-box {
   width: 980px;
@@ -202,22 +214,22 @@ a:link {
 }
 .essay-main-banner {
   width: 100%;
-  height: 300px;
-  background: url(../images/essay-banner.jpg) no-repeat;
+  height: 240px;
+  background: url(../images/essay-banner.jpg) no-repeat center center;
   background-size: cover;
 }
 .essay-main-menus {
-  height: 100px;
+  height: 60px;
   text-align: center;
   border-bottom: 1px solid #ccc;
 }
 .essay-main-menus > li:not(.home-btn) {
   display: inline-block;
-  height: 70px;
+  height: 46px;
   padding: 0 5px;
-  margin: 15px 20px;
-  font-size: 22px;
-  line-height: 70px;
+  margin: 7px 20px;
+  font-size: 18px;
+  line-height: 46px;
   color: #999;
   vertical-align: top;
   cursor: pointer;
@@ -235,13 +247,13 @@ a:link {
 .essay-main-menus .home-btn {
   position: relative;
   display: inline-block;
-  width: 200px;
-  height: 200px;
+  width: 140px;
+  height: 140px;
   margin-top: 0;
   cursor: pointer;
-  -webkit-transform: translateY(-70px);
-      -ms-transform: translateY(-70px);
-          transform: translateY(-70px);
+  -webkit-transform: translateY(-60px);
+      -ms-transform: translateY(-60px);
+          transform: translateY(-60px);
   /* 主菜单变形 */
 }
 .essay-main-menus .home-btn .index-btn {
@@ -252,8 +264,8 @@ a:link {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  font-size: 36px;
-  line-height: 200px;
+  font-size: 28px;
+  line-height: 140px;
   color: #fff;
   background: #1abc9c;
   border: 4px solid #fff;
@@ -303,11 +315,11 @@ a:link {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   margin: -40px 0 0 -40px;
-  font-size: 22px;
-  line-height: 80px;
+  font-size: 18px;
+  line-height: 70px;
   -webkit-transition: .3s;
           transition: .3s;
 }
@@ -332,32 +344,86 @@ a:link {
           transition-delay: .7s;
 }
 .essay-main-menus .home-btn:hover .index-nav-01 {
-  -webkit-transform: translate(-168px, -71px);
-      -ms-transform: translate(-168px, -71px);
-          transform: translate(-168px, -71px);
+  -webkit-transform: translate(-126px, -41px);
+      -ms-transform: translate(-126px, -41px);
+          transform: translate(-126px, -41px);
 }
 .essay-main-menus .home-btn:hover .index-nav-02 {
-  -webkit-transform: translate(-103px, -138px);
-      -ms-transform: translate(-103px, -138px);
-          transform: translate(-103px, -138px);
+  -webkit-transform: translate(-77px, -105px);
+      -ms-transform: translate(-77px, -105px);
+          transform: translate(-77px, -105px);
 }
 .essay-main-menus .home-btn:hover .index-nav-04 {
-  -webkit-transform: translate(0, -160px);
-      -ms-transform: translate(0, -160px);
-          transform: translate(0, -160px);
+  -webkit-transform: translate(0, -130px);
+      -ms-transform: translate(0, -130px);
+          transform: translate(0, -130px);
 }
 .essay-main-menus .home-btn:hover .index-nav-05 {
-  -webkit-transform: translate(103px, -138px);
-      -ms-transform: translate(103px, -138px);
-          transform: translate(103px, -138px);
+  -webkit-transform: translate(77px, -108px);
+      -ms-transform: translate(77px, -108px);
+          transform: translate(77px, -108px);
 }
 .essay-main-menus .home-btn:hover .index-nav-06 {
-  -webkit-transform: translate(168px, -71px);
-      -ms-transform: translate(168px, -71px);
-          transform: translate(168px, -71px);
+  -webkit-transform: translate(126px, -41px);
+      -ms-transform: translate(126px, -41px);
+          transform: translate(126px, -41px);
 }
 .current.essay-area .essay-main-box {
   -webkit-transform: translateY(0);
       -ms-transform: translateY(0);
           transform: translateY(0);
+}
+/* css 效果 */
+.css-area {
+  height: 100%;
+  background: #f1eff0;
+}
+.css-left-nav {
+  width: 250px;
+  height: 100%;
+  background: #232b2e;
+  box-shadow: 0 0 30px #000;
+}
+.css-left-nav .index-header {
+  width: 100%;
+  margin: 0;
+}
+.css-left-nav .index-header > * {
+  float: none;
+  margin: 0;
+  border-radius: 0;
+}
+.css-left-nav .index-nav {
+  width: 100%;
+  height: 50px;
+  padding-right: 24px;
+  margin: 0;
+  font-size: 20px;
+  line-height: 50px;
+  color: rgba(255, 255, 255, .8);
+  text-align: right;
+  text-shadow: 1px 1px 3px #666;
+  background: -webkit-linear-gradient(top, #343c3f, #2c3437);
+  background:         linear-gradient(to bottom, #343c3f, #2c3437);
+  -webkit-transition: .3s;
+          transition: .3s;
+}
+.css-left-nav .index-nav:before {
+  display: none;
+}
+.css-left-nav .index-logo {
+  width: 100%;
+  height: 100px;
+  padding: 0;
+  font-size: 40px;
+  font-weight: normal;
+  line-height: 100px;
+  text-shadow: 0 0 0 transparent;
+  box-shadow: 0 0 0 transparent;
+}
+.css-left-nav .index-nav:hover,
+.css-left-nav .index-nav-02 {
+  color: #fff;
+  background: -webkit-linear-gradient(top, #f5b043, #f39c12);
+  background:         linear-gradient(to bottom, #f5b043, #f39c12);
 }

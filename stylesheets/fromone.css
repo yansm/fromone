@@ -17,7 +17,7 @@ a:link {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 999;
+  z-index: 2;
   display: none;
 }
 .full-screen > li {
@@ -85,17 +85,111 @@ a:link {
       -ms-transform: none;
           transform: none;
 }
-.full-screen.essay > li {
+.essay .full-screen > li {
   background-color: #1abc9c;
   background-image: none;
 }
-.full-screen.css > li {
+.essay .full-screen > li:nth-child(9):before {
+  padding-left: 60px;
+  font-size: 60px;
+  font-weight: bolder;
+  color: #0e6252;
+  text-shadow: 0 1px 1px #fff;
+  content: "from one";
+}
+.css .full-screen > li {
   background-color: #f39c12;
   background-image: url(../images/css-background.jpg);
 }
-.full-screen.index > li {
-  background-color: #f39c12;
+.index .full-screen > li {
+  background-color: #fff;
   background-image: url(../images/index-background.jpg);
+}
+/* loading 蒙版 */
+.loading-area {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+  background: #fff;
+  -webkit-transition: .99s;
+          transition: .99s;
+}
+.loading-area.current {
+  opacity: 0;
+  -webkit-transform: scale(2);
+      -ms-transform: scale(2);
+          transform: scale(2);
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 168px;
+  height: 130px;
+  margin: -65px 0 0 -84px;
+  font-size: 10px;
+  text-align: center;
+}
+.spinner > div {
+  display: inline-block;
+  width: 15px;
+  height: 100%;
+  margin: 2px;
+  background-color: #999;
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+          animation: stretchdelay 1.2s infinite ease-in-out;
+}
+.spinner > div:nth-child(2) {
+  -webkit-animation-delay: -1.1s;
+          animation-delay: -1.1s;
+}
+.spinner > div:nth-child(3) {
+  -webkit-animation-delay: -1s;
+          animation-delay: -1s;
+}
+.spinner > div:nth-child(4) {
+  -webkit-animation-delay: -.9s;
+          animation-delay: -.9s;
+}
+.spinner > div:nth-child(5) {
+  -webkit-animation-delay: -.8s;
+          animation-delay: -.8s;
+}
+.spinner > div:nth-child(6) {
+  -webkit-animation-delay: -.7s;
+          animation-delay: -.7s;
+}
+.spinner > aside {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #999;
+}
+@-webkit-keyframes stretchdelay {
+  0%,
+  40%,
+  100% {
+    -webkit-transform: scaleY(.6);
+            transform: scaleY(.6);
+  }
+  20% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+  }
+}
+@keyframes stretchdelay {
+  0%,
+  40%,
+  100% {
+    -webkit-transform: scaleY(.6);
+            transform: scaleY(.6);
+  }
+  20% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+  }
 }
 /* index-area 样式 */
 .index-header {
@@ -176,18 +270,18 @@ a:link {
   background: #2c3e50;
 }
 /* top-area & bottom-area */
-.top-screen,
-.bottom-screen {
+#top,
+#bottom {
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 3;
   display: none;
 }
-.bottom-screen {
-  z-index: 900;
+#bottom {
+  z-index: 1;
 }
 /* essay 效果 */
 .essay-area {

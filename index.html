@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html> 
 	<head>  
 		<meta charset="utf-8" />  
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,18 +17,21 @@
 		<link type="text/css" rel="stylesheet" href="./stylesheets/zxx.lib.css"></link>
 		<link rel="stylesheet" href="./stylesheets/fromone.css"></link>
 	</head>
-	<body>  
-		<!-- index menus -->
+	
+		<!-- main-screen -->
+			<body class="index" data-model="index" data-level="1" data-type="bottom" data-url="index">  <div id="bottom" style="display:block;">
+<div class="index-area" data-screen="bottom">  
 		<header class="index-header">
 	<div class="index-logo" click-target="change-btn">from one <aside></aside></div>
 	<div class="index-nav index-nav-01">js</div>
-	<div class="index-nav index-nav-02" click-target="change-btn" data-level="1" data-type="bottom" data-model="css">css</div>
-	<div class="index-nav index-nav-03" click-target="change-btn" data-level="1" data-type="top" data-model="essay">随笔</div>
+	<div class="index-nav index-nav-02" click-target="change-btn" data-level="1" data-type="bottom" data-model="css" data-url="css">css</div>
+	<div class="index-nav index-nav-03" click-target="change-btn" data-level="1" data-type="top" data-model="essay" data-url="essay">随笔</div>
 	<div class="index-nav index-nav-04">短语</div>
 	<div class="index-nav index-nav-05">相册</div>
 	<div class="index-nav index-nav-06">about</div>
-</header>
-		<div class="bottom-screen"></div>
+</header>         
+</div>                         
+</div>         
 		<ul class="full-screen">
 			<li></li>
 			<li></li>
@@ -41,7 +44,17 @@
 			<li></li>
 			<li></li>
 		</ul>
-		<div class="top-screen"></div>
+		<div class="loading-area">
+			<div class="spinner">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>	
+				<div></div>
+				<div></div>
+				<aside>loading</aside>
+			</div>
+		</div>
 	</body>
 	<script src="./lib/jquery-1.10.2.min.js"></script>
 	<script src="http://yansm.github.io/fromzero/lib/myDatas.js"></script>

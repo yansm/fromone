@@ -241,7 +241,21 @@ a:link {
   bottom: 0;
   left: 0;
   z-index: 9;
+  display: none;
   background: rgba(255, 255, 255, .6);
+  opacity: 0;
+  -webkit-transition: 500ms;
+          transition: 500ms;
+
+  -webkit-perspective: 800;
+          perspective: 800;
+}
+.modal-area.current {
+  opacity: 1;
+}
+.modal-area.current .modal-box {
+  -webkit-transform: rotateX(0);
+          transform: rotateX(0);
 }
 .modal-box {
   position: absolute;
@@ -252,6 +266,10 @@ a:link {
   margin-left: -250px;
   background: #fff;
   box-shadow: 0 0 30px rgba(125, 125, 125, .8);
+  -webkit-transition: 500ms;
+          transition: 500ms;
+  -webkit-transform: rotateX(30deg);
+          transform: rotateX(30deg);
 }
 .modal-box iframe {
   width: 100%;

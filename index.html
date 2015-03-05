@@ -11,11 +11,18 @@
 			article, aside, dialog, figure, footer, header, hgroup, menu, nav, section { display: block; }
 		</style>
 		<![endif]-->
-		<link type="text/css" rel="stylesheet" href="./lib/bootstrap/css/bootstrap.css"></link>
-		<link type="text/css" rel="stylesheet" href="./stylesheets/reset.css"></link>
-		<link type="text/css" rel="stylesheet" href="./stylesheets/common.css"></link>
-		<link type="text/css" rel="stylesheet" href="./stylesheets/zxx.lib.css"></link>
-		<link rel="stylesheet" href="./stylesheets/fromone.css"></link>
+		<link type="text/css" rel="stylesheet" href="/stylesheets/reset.css"></link>
+		<link type="text/css" rel="stylesheet" href="/stylesheets/common.css"></link>
+		<link type="text/css" rel="stylesheet" href="/stylesheets/zxx.lib.css"></link>
+		<link type="text/css" rel="stylesheet" href="/lib/jscrollpane/jquery.jscrollpane.css"></link>
+		<link rel="stylesheet" href="/stylesheets/fromone.css"></link>
+		<script src="/lib/react.js"></script>
+		<script src="/lib/jquery-1.10.2.min.js"></script>
+		<script src="/lib/jscrollpane/jquery.mousewheel.js"></script>
+		<script src="/lib/jscrollpane/mwheelIntent.js"></script>
+		<script src="/lib/jscrollpane/jquery.jscrollpane.min.js"></script>
+		<script src="/lib/fromreact.js"></script>	
+		<script src="/lib/fromone.debug.js"></script>	
 	</head>
 	
 		<!-- main-screen -->
@@ -28,7 +35,7 @@
 	<div class="index-nav index-nav-03" click-target="change-btn" data-level="1" data-type="top" data-model="essay" data-url="essay">随笔</div>
 	<div class="index-nav index-nav-04" click-target="change-btn" data-level="1" data-type="bottom" data-model="phrase" data-url="phrase">短语</div>
 	<div class="index-nav index-nav-05">相册</div>
-	<div class="index-nav index-nav-06">about</div>
+	<div class="index-nav index-nav-06" click-target="change-btn" data-level="1" data-type="bottom" data-model="about" data-url="about">about</div>
 </header> 
 		<div class="label-area">
 			<a class="label-box label-box-4">
@@ -44,48 +51,54 @@
 					<p>我的个人主页</p>
 					<p>fromone</p>
 				</aside>
-				<div class="label-icon"></div>
+				<div class="label-icon"><div class="from-icon"></div></div>
 			</a>
-			<a class="label-box "></a>
+			<a class="label-box "><img src="./images/index-label-4.jpg"></a>
 			<a class="label-box "><img src="./images/index-label-1.jpg"></a>
-			<a class="label-box label-item label-item-3">
+			<a class="label-box label-item label-item-3"> 
 				<aside>
 					<p>css3做的图标</p>
 					<p>fromicons</p>
 					<p>可缩放，可换色</p>
 				</aside>
-				<div class="label-icon"></div>
+				<div class="label-icon"><div class="from-icon"></div></div>
 			</a>
 			<a class="label-box label-item label-item-2" href="http://www.gbtags.com/gb/site/formzero.htm">
 				<aside>
 					<p>我的gbtags主页</p>
 					<p>依旧沉睡</p>
 				</aside>
-				<div class="label-icon"></div>
+				<div class="label-icon"><div class="from-icon"></div></div>
 			</a>
 			<a class="label-box "><img src="./images/index-label-2.jpg"></a>
 			<a class="label-box "><img src="./images/index-label-3.jpg"></a>
+			<a class="label-box label-item label-item-5" click-target="page-btn" data-model="index-page" data-url="_post/index/label">
+				<aside>
+					<p>前往留言墙</p>
+					<p>留下些足迹和建议吧</p>
+				</aside>
+				<div class="label-icon"><div class="from-icon"></div></div>
+			</a>
+			<a class="label-box"></a>
+			<a class="label-box"></a>
+			<a class="label-box "><img src="./images/index-label-5.jpg"></a>
+			<a class="label-box label-item label-item-4" href="http://yansm.github.io/fromzero/?menuIndex=1">
+				<aside>
+					<p>附上个人简历~</p>
+				</aside>
+				<div class="label-icon"><div class="from-icon"></div></div>
+			</a> 
 			<a class="label-box label-item label-item-6" href="https://github.com/yansm/fromone">
 				<aside>
 					<p>这里下载源码</p>
 					<p>by github</p>
 					<p>记得给星哦~</p>
 				</aside>
-				<div class="label-icon"></div>
+				<div class="label-icon"><div class="from-icon"></div></div>
 			</a>
 			<a class="label-box"></a>
-			<a class="label-box"></a>
-			<a class="label-box "><img src="./images/index-label-5.jpg"></a>
-			<a class="label-box "><img src="./images/index-label-4.jpg"></a>
-			<a class="label-box label-item label-item-4" href="http://yansm.github.io/fromzero/?menuIndex=1">
-				<aside>
-					<p>附上个人简历~</p>
-				</aside>
-				<div class="label-icon"></div>
-			</a> 
-			<a class="label-box"></a>
 		</div>
-	</div>                         
+	</div>     
 </div>         
 		<ul class="full-screen">
 			<li></li>
@@ -111,9 +124,6 @@
 			</div>
 		</div>
 	</body>
-	<script src="./lib/jquery-1.10.2.min.js"></script>
-	<script src="http://yansm.github.io/fromzero/lib/myDatas.js"></script>
-	<script src="./lib/bootstrap/js/bootstrap.js"></script>
-	<script src="./lib/fromone.debug.js"></script>	
+	
 </html>
     

@@ -215,6 +215,49 @@ a:link {
             transform: scaleY(1);
   }
 }
+/* top-area & bottom-area */
+#top,
+#bottom,
+#page {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  display: none;
+}
+#bottom {
+  z-index: 1;
+}
+#page {
+  z-index: 4;
+}
+/* 模态框 */
+.modal-area {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+  background: rgba(255, 255, 255, .6);
+}
+.modal-box {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  width: 500px;
+  height: 400px;
+  margin-left: -250px;
+  background: #fff;
+  box-shadow: 0 0 30px rgba(125, 125, 125, .8);
+}
+.modal-box iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
 /* index-area 样式 */
 .index-header {
   width: 1200px;
@@ -486,24 +529,6 @@ a:link {
   -webkit-transform: translateY(0);
       -ms-transform: translateY(0);
           transform: translateY(0);
-}
-/* top-area & bottom-area */
-#top,
-#bottom,
-#page {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 3;
-  display: none;
-}
-#bottom {
-  z-index: 1;
-}
-#page {
-  z-index: 4;
 }
 /* essay 效果 */
 .essay-area {

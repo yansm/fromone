@@ -1,1 +1,1 @@
-[{"title":"","catgory":"_post index","dest":"_post\\index\\label.html","time":"label"}]
+[{"title":"","catgory":"post index","dest":"post\\index\\label.html","time":"label"}]

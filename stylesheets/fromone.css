@@ -1050,6 +1050,8 @@ a:link {
   padding: 24px 24px 0;
   overflow: hidden;
   font-size: 14px;
+  word-break: break-word;
+  word-break: break-all;
 }
 .leave-word-time {
   padding-right: 30px;

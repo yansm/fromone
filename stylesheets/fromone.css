@@ -1013,9 +1013,9 @@ a:link {
   z-index: 1;
   width: 100%;
   height: 100%;
-  background: -webkit-linear-gradient(315deg, transparent 22px, #ededed 22px, #ededed 24px, transparent 24px, transparent 67px, #ededed 67px, #ededed 69px, transparent 69px), -webkit-linear-gradient(225deg, transparent 22px, #ededed 22px, #ededed 24px, transparent 24px, transparent 67px, #ededed 67px, #ededed 69px, transparent 69px) 0 64px;
-  background:         linear-gradient(135deg, transparent 22px, #ededed 22px, #ededed 24px, transparent 24px, transparent 67px, #ededed 67px, #ededed 69px, transparent 69px), linear-gradient(225deg, transparent 22px, #ededed 22px, #ededed 24px, transparent 24px, transparent 67px, #ededed 67px, #ededed 69px, transparent 69px) 0 64px;
-  background-color: #fff;
+  background: -webkit-linear-gradient(315deg, transparent 22px, #e6e6e6 22px, #e6e6e6 24px, transparent 24px, transparent 67px, #e6e6e6 67px, #e6e6e6 69px, transparent 69px), -webkit-linear-gradient(225deg, transparent 22px, #e6e6e6 22px, #e6e6e6 24px, transparent 24px, transparent 67px, #e6e6e6 67px, #e6e6e6 69px, transparent 69px) 0 64px;
+  background:         linear-gradient(135deg, transparent 22px, #e6e6e6 22px, #e6e6e6 24px, transparent 24px, transparent 67px, #e6e6e6 67px, #e6e6e6 69px, transparent 69px), linear-gradient(225deg, transparent 22px, #e6e6e6 22px, #e6e6e6 24px, transparent 24px, transparent 67px, #e6e6e6 67px, #e6e6e6 69px, transparent 69px) 0 64px;
+  background-color: #efefef;
   background-size: 64px 128px;
 }
 .leave-word-needle {
@@ -1024,7 +1024,7 @@ a:link {
   left: 10px;
   width: 32px;
   height: 32px;
-  background-color: #a563c1;
+  background-color: #cb0000;
   border-radius: 50%;
   box-shadow: 3px 3px 4px rgba(125, 125, 125, .8);
 }
@@ -1042,8 +1042,8 @@ a:link {
 .leave-word-needle:after {
   width: 26px;
   height: 26px;
-  background: #a563c1;
-  box-shadow: -2px -2px 2px #a563c1;
+  background: #cb0000;
+  box-shadow: -2px -2px 2px #fe0000;
 }
 .leave-word-content {
   height: 160px;
@@ -1062,7 +1062,6 @@ a:link {
   width: 250px;
   height: 250px;
   margin: 10px;
-  background: #f2eed0;
 }
 .leave-word-label h4 {
   position: relative;
@@ -1085,8 +1084,18 @@ a:link {
   background:         linear-gradient(left, #fcc 80%, transparent);
   border-radius: 3px;
 }
-.leave-word-label-1:before,
-.leave-word-label-1:after {
+.leave-word-box {
+  height: inherit;
+  background: #fff;
+  border: 1px solid #ccc;
+}
+.leave-word-label-1 {
+  -webkit-transform: rotate(5deg);
+      -ms-transform: rotate(5deg);
+          transform: rotate(5deg);
+}
+.leave-word-label-1 .leave-word-before,
+.leave-word-label-1 .leave-word-after {
   position: absolute;
   bottom: 15px;
   left: 10px;
@@ -1100,7 +1109,7 @@ a:link {
       -ms-transform: rotate(-4deg);
           transform: rotate(-4deg);
 }
-.leave-word-label-1:after {
+.leave-word-label-1 .leave-word-after {
   right: 10px;
   left: auto;
   -webkit-transform: rotate(4deg);
@@ -1110,10 +1119,15 @@ a:link {
 .leave-word-label-2 {
   height: 240px;
   margin-bottom: 20px;
-  background-image: -webkit-linear-gradient(transparent 20%, rgba(0, 0, 0, .1) 70%, transparent 100%);
-  background-image:         linear-gradient(transparent 20%, rgba(0, 0, 0, .1) 70%, transparent 100%);
+  background-image: -webkit-linear-gradient(transparent 20%, rgba(0, 0, 0, .06) 70%, transparent 100%);
+  background-image:         linear-gradient(transparent 20%, rgba(0, 0, 0, .06) 70%, transparent 100%);
+  -webkit-transform: rotate(-1deg);
+      -ms-transform: rotate(-1deg);
+          transform: rotate(-1deg);
+  /* .leave-word-needle{left:120px;}
+	h4{transform:rotate(4deg) translateY(19px)}  */
 }
-.leave-word-label-2:before {
+.leave-word-label-2 .leave-word-before {
   position: absolute;
   bottom: 15px;
   left: 4%;
@@ -1125,9 +1139,14 @@ a:link {
 }
 .leave-word-label-3 {
   border-bottom-right-radius: 75px 10px;
+  -webkit-transform: rotate(-4deg);
+      -ms-transform: rotate(-4deg);
+          transform: rotate(-4deg);
+  /* 	.leave-word-needle{left:auto;right:15px;top:18px;}
+	h4{transform:rotate(7deg);} */
 }
-.leave-word-label-3:before,
-.leave-word-label-3:after {
+.leave-word-label-3 .leave-word-before,
+.leave-word-label-3 .leave-word-after {
   position: absolute;
   bottom: 27px;
   left: 10px;
@@ -1141,7 +1160,7 @@ a:link {
       -ms-transform: rotate(-4deg);
           transform: rotate(-4deg);
 }
-.leave-word-label-3:after {
+.leave-word-label-3 .leave-word-after {
   right: 4px;
   bottom: 23px;
   left: auto;
@@ -1154,9 +1173,14 @@ a:link {
   margin-bottom: 14px;
   background-image: -webkit-linear-gradient(rgba(0, 0, 0, .04) 10%, transparent 30%, transparent 70%, rgba(0, 0, 0, .04) 90%);
   background-image:         linear-gradient(rgba(0, 0, 0, .04) 10%, transparent 30%, transparent 70%, rgba(0, 0, 0, .04) 90%);
+  -webkit-transform: rotate(3deg);
+      -ms-transform: rotate(3deg);
+          transform: rotate(3deg);
+  /* 	.leave-word-needle{left:24px;top:16px;}
+	h4{transform:rotate(-9deg)} */
 }
-.leave-word-label-4:before,
-.leave-word-label-4:after {
+.leave-word-label-4 .leave-word-before,
+.leave-word-label-4 .leave-word-after {
   position: absolute;
   top: 2%;
   left: 7px;
@@ -1167,7 +1191,7 @@ a:link {
   border-radius: 10% / 100%;
   box-shadow: -10px 0 8px rgba(125, 125, 125, .8);
 }
-.leave-word-label-4:after {
+.leave-word-label-4 .leave-word-after {
   right: 7px;
   left: auto;
   box-shadow: 10px 0 8px rgba(125, 125, 125, .8);
@@ -1181,7 +1205,7 @@ a:link {
   width: 84px;
   height: 84px;
   overflow: hidden;
-  background: #ccc;
+  background: #333;
   border-radius: 42px;
   box-shadow: inset 0 0 5px rgba(125, 125, 125, .4);
   opacity: .6;
@@ -1243,6 +1267,7 @@ a:link {
   height: 120px;
   margin: 24px 30px 10px;
   font-size: 14px;
+  color: #ccc;
   resize: none;
   background: transparent;
   border: 0;
@@ -1253,6 +1278,7 @@ a:link {
 .login-box .login-box-cont {
   padding-left: 40px;
   font-size: 14px;
+  color: #ccc;
 }
 .login-box .login-box-num {
   font-size: 30px;

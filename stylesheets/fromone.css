@@ -26,6 +26,42 @@ a:link {
   vertical-align: middle;
   background: transparent url(../images/icons.png) 0 0 no-repeat;
 }
+.close-angle {
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  z-index: 9;
+  width: 160px;
+  height: 160px;
+  cursor: pointer;
+  background: #000;
+  border-radius: 50%;
+  opacity: .4;
+  -webkit-transition: 400ms;
+          transition: 400ms;
+}
+.close-angle:before,
+.close-angle:after {
+  position: absolute;
+  bottom: 49px;
+  left: 33px;
+  width: 50px;
+  height: 2px;
+  content: "";
+  background: #fff;
+  opacity: .6;
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.close-angle:after {
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.close-angle:hover {
+  opacity: .6;
+}
 /* 前方蒙版 */
 .full-screen {
   position: fixed;
@@ -929,29 +965,58 @@ a:link {
 }
 /* 便签墙 */
 .index-page-area {
+  position: relative;
   width: 100%;
   height: 100%;
+  background: rgba(0, 0, 0, 0);
 }
-.index-page-area.current .leave-word-area {
+.index-page-area:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  content: '';
+  background: #000;
+  opacity: 0;
+  -webkit-transition: .8s;
+          transition: .8s;
+}
+.index-page-area.current:before {
+  opacity: .6;
+}
+.index-page-area.current .index-page-box {
   -webkit-transform: translateY(0);
       -ms-transform: translateY(0);
           transform: translateY(0);
 }
-.leave-word-area {
+.index-page-area .scroll-pane {
+  height: 100%;
+  overflow: auto;
+}
+.index-page-box {
   position: relative;
-  z-index: 1;
-  width: 100%;
-  min-height: 100%;
-  background: -webkit-linear-gradient(315deg, transparent 22px, #ededed 22px, #ededed 24px, transparent 24px, transparent 67px, #ededed 67px, #ededed 69px, transparent 69px), -webkit-linear-gradient(225deg, transparent 22px, #ededed 22px, #ededed 24px, transparent 24px, transparent 67px, #ededed 67px, #ededed 69px, transparent 69px) 0 64px;
-  background:         linear-gradient(135deg, transparent 22px, #ededed 22px, #ededed 24px, transparent 24px, transparent 67px, #ededed 67px, #ededed 69px, transparent 69px), linear-gradient(225deg, transparent 22px, #ededed 22px, #ededed 24px, transparent 24px, transparent 67px, #ededed 67px, #ededed 69px, transparent 69px) 0 64px;
-  background-color: #fff;
-  background-size: 64px 128px;
+  height: 100%;
+  overflow: hidden;
   box-shadow: 0 0 30px rgba(125, 125, 125, .8);
   -webkit-transition: 1s cubic-bezier(.86, 0, .07, 1);
           transition: 1s cubic-bezier(.86, 0, .07, 1);
   -webkit-transform: translateY(100%);
       -ms-transform: translateY(100%);
           transform: translateY(100%);
+}
+.index-page-container {
+  height: 100%;
+}
+.leave-word-area {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: -webkit-linear-gradient(315deg, transparent 22px, #ededed 22px, #ededed 24px, transparent 24px, transparent 67px, #ededed 67px, #ededed 69px, transparent 69px), -webkit-linear-gradient(225deg, transparent 22px, #ededed 22px, #ededed 24px, transparent 24px, transparent 67px, #ededed 67px, #ededed 69px, transparent 69px) 0 64px;
+  background:         linear-gradient(135deg, transparent 22px, #ededed 22px, #ededed 24px, transparent 24px, transparent 67px, #ededed 67px, #ededed 69px, transparent 69px), linear-gradient(225deg, transparent 22px, #ededed 22px, #ededed 24px, transparent 24px, transparent 67px, #ededed 67px, #ededed 69px, transparent 69px) 0 64px;
+  background-color: #fff;
+  background-size: 64px 128px;
 }
 .leave-word-needle {
   position: absolute;
@@ -1124,7 +1189,7 @@ a:link {
           transition: 400ms;
 }
 .login-box:hover {
-  width: 284px;
+  /* width:284px; */
   opacity: 1;
   -webkit-transition-timing-function: cubic-bezier(.17, .67, .48, 1.51);
           transition-timing-function: cubic-bezier(.17, .67, .48, 1.51);
@@ -1210,4 +1275,7 @@ a:link {
   border-radius: 50%;
   -webkit-transition: 400ms;
           transition: 400ms;
+}
+.login-box-btn:before {
+  content: "登录";
 }

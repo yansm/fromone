@@ -632,6 +632,8 @@ a:link {
   background-size: cover;
 }
 .essay-main-menus {
+  position: relative;
+  z-index: 1;
   height: 60px;
   text-align: center;
   border-bottom: 1px solid #ccc;
@@ -785,6 +787,164 @@ a:link {
   -webkit-transform: translateY(0);
       -ms-transform: translateY(0);
           transform: translateY(0);
+}
+.essay-list {
+  overflow: hidden;
+}
+.essay-list .article-box {
+  position: relative;
+  padding: 24px 48px 0 190px;
+  border-bottom: 1px solid #eee;
+  -webkit-transition: .3s;
+          transition: .3s;
+}
+.essay-list .article-box:hover {
+  background: #f7fcfb;
+  -webkit-transform: translateX(20px);
+      -ms-transform: translateX(20px);
+          transform: translateX(20px);
+}
+.essay-list .article-time {
+  position: absolute;
+  top: 24px;
+  left: 72px;
+  width: 100px;
+  height: 100px;
+  padding-top: 28px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1abc9c;
+  text-align: center;
+  border: 4px solid #ccc;
+  border-radius: 50%;
+}
+.essay-list .article-time .year {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  font-size: 16px;
+  color: #ccc;
+}
+.essay-list .article-time .month {
+  padding-right: 4px;
+}
+.essay-list .article-time .month:after {
+  padding-left: 4px;
+  content: "-";
+}
+.essay-list .article-author {
+  font-size: 14px;
+  color: #ccc;
+}
+.essay-list .article-author:before {
+  padding-right: 8px;
+  color: #1abc9c;
+  content: "by";
+}
+.essay-list .article-intro {
+  height: 54px;
+  overflow: hidden;
+  font-size: 14px;
+  color: #999;
+  word-wrap: break-word;
+}
+.essay-list .article-more {
+  position: relative;
+  width: 120px;
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 2;
+  color: #1abc9c;
+  cursor: pointer;
+}
+.essay-list .article-more:before {
+  position: absolute;
+  bottom: 0;
+  left: -14px;
+  width: 0;
+  height: 2px;
+  content: "";
+  background: #1abc9c;
+  -webkit-transition: .4s;
+          transition: .4s;
+}
+.essay-list .article-more:hover:before {
+  width: 100%;
+}
+.essay-page-area {
+  width: 100%;
+  height: 100%;
+}
+.essay-page-area.current .mainbody-area {
+  -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+          transform: translateX(0);
+}
+.essay-page-area .mainbody-area {
+  position: absolute;
+  top: 0;
+  /*为后面带翻页做准备*/
+  right: 0;
+  width: 80%;
+  min-width: 960px;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 30px #555;
+  -webkit-transition: 800ms cubic-bezier(.86, 0, .07, 1);
+          transition: 800ms cubic-bezier(.86, 0, .07, 1);
+  -webkit-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+          transform: translateX(100%);
+}
+.essay-page-area .mainbody-area .close-angle {
+  left: -70px;
+  -webkit-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+.essay-page-area .mainbody-box {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.essay-page-area .mainbody-item {
+  width: 900px;
+  padding-top: 64px;
+  margin: 0 auto;
+}
+.essay-page-area .mainbody-title {
+  font-size: 36px;
+  line-height: 1.7;
+  color: #777;
+  border-bottom: 2px solid #1abc9c;
+}
+.essay-page-area .mainbody-info {
+  font-size: 14px;
+  line-height: 2;
+  color: #999;
+}
+.essay-page-area .mainbody-author {
+  padding-right: 10px;
+}
+.essay-page-area .mainbody-content {
+  padding-top: 24px;
+  color: #666;
+  text-shadow: 0 0 1px #999;
+}
+.essay-page-area .mainbody-content p {
+  padding: 8px 0;
+}
+.essay-page-area .mainbody-content:first-letter {
+  font-size: 2em;
+  color: #1abc9c;
+}
+@media only screen and (max-width: 1400px) {
+  .essay-page-area .mainbody-area {
+    width: 88%;
+  }
 }
 /* css 效果 */
 .css-area {

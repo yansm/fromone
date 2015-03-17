@@ -20,7 +20,7 @@
 		<script src="/fromone/lib/jquery-1.10.2.min.js"></script>
 		<script src="/fromone/lib/jscrollpane/jquery.mousewheel.js"></script>
 		<script src="/fromone/lib/jscrollpane/mwheelIntent.js"></script>
-		<script src="/fromone/lib/jscrollpane/jquery.jscrollpane.min.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.jscrollpane.js"></script>
 		<script src="/fromone/lib/lodash.min.js"></script>	
 		<script src="/fromone/map_post.js"></script>	
 		<script src="/fromone/lib/fromreact.js"></script>	
@@ -29,9 +29,10 @@
 	
 		<!-- main-screen -->
 			<body class="phrase" data-model="phrase" data-level="1" data-type="bottom" data-url="phrase"> <div id="bottom" style="display:block;">
- <div class="phrase-area" data-screen="bottom">
-	<div class="phrase-header">
-	<header class="index-header">
+ <div class="phrase-area  scroll-pane" data-screen="bottom">
+	<div class="phrase-main">
+		<div class="phrase-header">
+		<header class="index-header">
 	<div class="index-logo" click-target="change-btn">from one <aside></aside></div>
 	<div class="index-nav index-nav-01">js</div>
 	<div class="index-nav index-nav-02" click-target="change-btn" data-level="1" data-type="bottom" data-model="css" data-url="css">css</div>
@@ -40,18 +41,23 @@
 	<div class="index-nav index-nav-05">相册</div> 
 	<div class="index-nav index-nav-06" click-target="change-btn" data-level="1" data-type="bottom" data-model="about" data-url="about">about</div>
 </header> 
-	</div>
-	<div class="phrase-banner">
-		<aside>
-			<p>这里是我大学时候写的一些东西,与编程无关</p>
-			<p>与现在的一切都无关</p>
-			<p>只是一些堆砌起来的回忆，不舍得扔掉</p> 
-		</aside>
-	</div>
-	<div class="phrase-choose">
-		<div class="phrase-choose-item current"><div class="from-icon"><p>短语</p></div></div>
-		<div class="phrase-choose-item"><div class="from-icon"><p>小说</p></div></div>
-		<div class="phrase-choose-or">or</div>
+		</div>
+		<div class="phrase-banner">
+			<aside>
+				<p>这里是我大学时候写的一些东西,与编程无关</p>
+				<p>与现在的一切都无关</p>
+				<p>只是一些堆砌起来的回忆，不舍得扔掉</p> 
+			</aside>
+		</div>
+		<div class="phrase-choose">
+			<div class="phrase-choose-item current" click-target="catgory-btn" data-model="phrase" data-catgory="prose"><div class="from-icon"><p>短语</p></div></div>
+			<div class="phrase-choose-item" click-target="catgory-btn" data-model="phrase" data-catgory="novel"><div class="from-icon"><p>小说</p></div></div>
+			<div class="phrase-choose-or">or</div>
+		</div>
+		<section class="phrase-list fix">
+			
+		</section>
+		<div class="more-btn" click-target="more-btn" data-model="phrase">查看更多</div>
 	</div>
 </div> 
 </div> 

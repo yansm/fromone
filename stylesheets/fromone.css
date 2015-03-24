@@ -384,6 +384,9 @@ a:link {
       -ms-transform: rotate(135deg);
           transform: rotate(135deg);
 }
+.index-nav-00 {
+  display: none;
+}
 .index-nav-01 {
   background: #e74c3c;
 }
@@ -629,6 +632,7 @@ a:link {
 }
 .mainbody-content {
   padding-top: 24px;
+  line-height: 1.7;
   color: #666;
   text-shadow: 0 0 1px #999;
 }
@@ -657,7 +661,7 @@ a:link {
 .jspDrag {
   background: rgba(0, 0, 0, .4);
 }
-:hover .jspVerticalBar {
+.jspContainer:hover .jspVerticalBar {
   opacity: 1;
 }
 .essay-area {
@@ -993,13 +997,27 @@ a:link {
 /* css 效果 */
 .css-area {
   height: 100%;
-  background: #f1eff0;
+  background: #f5f4ef;
+}
+.css-area .jspVerticalBar {
+  z-index: 2;
+}
+.css-left-logo {
+  padding: 36px 0;
+  margin-bottom: 28px;
+  font-size: 36px;
+  color: #976008;
+  text-align: center;
+  border-bottom: 1px solid;
+}
+.css-left-logo aside {
+  font-size: 14px;
+  color: #999;
 }
 .css-left-nav {
   width: 250px;
   height: 100%;
-  background: #232b2e;
-  box-shadow: 0 0 30px #000;
+  background: #1e1e1e;
 }
 .css-left-nav .index-header {
   width: 100%;
@@ -1013,36 +1031,284 @@ a:link {
 .css-left-nav .index-nav {
   width: 100%;
   height: 50px;
-  padding-right: 24px;
   margin: 0;
   font-size: 20px;
+  font-size: 18px;
   line-height: 50px;
-  color: rgba(255, 255, 255, .8);
-  text-align: right;
-  text-shadow: 1px 1px 3px #666;
-  background: -webkit-linear-gradient(top, #343c3f, #2c3437);
-  background:         linear-gradient(to bottom, #343c3f, #2c3437);
+  color: #976008;
+  text-align: center;
+  background: transparent;
   -webkit-transition: .3s;
           transition: .3s;
 }
 .css-left-nav .index-nav:before {
   display: none;
 }
-.css-left-nav .index-logo {
-  width: 100%;
-  height: 100px;
-  padding: 0;
-  font-size: 40px;
-  font-weight: normal;
-  line-height: 100px;
-  text-shadow: 0 0 0 transparent;
-  box-shadow: 0 0 0 transparent;
+.css-left-nav .index-nav-00 {
+  display: block;
 }
-.css-left-nav .index-nav:hover,
+.css-left-nav .index-logo,
 .css-left-nav .index-nav-02 {
+  display: none;
+}
+.css-left-nav .index-nav:hover {
+  padding-left: 10px;
+  color: #ccc;
+}
+.css-right-label {
+  position: relative;
+  z-index: 3;
+  width: 220px;
+  height: 100%;
+  padding-top: 100px;
+  background: #f0eee2;
+  border-left: 1px solid #aaa;
+}
+.css-label {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 62px;
+  margin-bottom: 36px;
+}
+.css-label > * {
+  -webkit-transition: .3s;
+          transition: .3s;
+}
+.css-label:hover .css-label-middle {
+  width: 0;
+  -webkit-transform: skew(0, 0);
+      -ms-transform: skew(0, 0);
+          transform: skew(0, 0);
+}
+.css-label:hover .css-label-end {
+  width: 70px;
+  background: #6fafa1;
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+.css-label:hover .css-label-end:after {
+  border-bottom-color: #6fafa1;
+}
+.css-label:hover .css-label-end:before {
+  border-top-color: #6fafa1;
+}
+.css-label-item {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 4;
+  width: 240px;
+  height: 100%;
+  font-size: 20px;
+  line-height: 62px;
+  color: #f0eee2;
+  text-align: center;
+  cursor: pointer;
+  background: #6fafa1;
+}
+.css-label-wall {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 85px;
+  margin-left: -1px;
+  background: #f0eee2;
+  border-left: 1px solid #999;
+}
+.css-label-middle {
+  position: absolute;
+  top: 0;
+  left: -20px;
+  z-index: 2;
+  width: 24px;
+  height: 62px;
+  background: #42766b;
+  -webkit-transform: skew(0, 45deg);
+      -ms-transform: skew(0, 45deg);
+          transform: skew(0, 45deg);
+  -webkit-transform-origin: 0;
+      -ms-transform-origin: 0;
+          transform-origin: 0;
+}
+.css-label-end {
+  position: absolute;
+  top: 0;
+  right: 240px;
+  z-index: 1;
+  width: 40px;
+  height: 62px;
+  background: #5fa696;
+  -webkit-transform: translate(25px, 22px);
+      -ms-transform: translate(25px, 22px);
+          transform: translate(25px, 22px);
+}
+.css-label-end:before,
+.css-label-end:after {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  content: '';
+  border-color: #5fa696 transparent transparent transparent;
+  border-style: solid;
+  border-width: 31px 16px;
+  -webkit-transition: inherit;
+          transition: inherit;
+  -webkit-transform: translate(16px, 0);
+      -ms-transform: translate(16px, 0);
+          transform: translate(16px, 0);
+}
+.css-label-end:after {
+  border-color: transparent transparent #5fa696 transparent;
+}
+.css-main {
+  width: 100%;
+  height: 100%;
+  padding: 0 220px 0 250px;
+}
+.css-main-box {
+  width: 100%;
+  height: 100%;
+}
+.css-list {
+  width: 100%;
+  padding-top: 1px;
+  overflow: hidden;
+}
+.css-list .article-box {
+  position: relative;
+  float: left;
+  width: 40%;
+  height: 160px;
+  padding: 40px 16px 16px 160px;
+  margin: 10px 0 10px 36px;
+  color: #425262;
+  background: #dddad3;
+  border-radius: 5px;
+}
+.css-list .article-box:before,
+.css-list .article-box:after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  content: "";
+  background: -webkit-linear-gradient(315deg, #edebe7 50%, #f5f4ef 50%, #f5f4ef 100%);
+  background:         linear-gradient(135deg, #edebe7 50%, #f5f4ef 50%, #f5f4ef 100%);
+  border-radius: 5px 0 5px 0;
+  -webkit-transition: .3s;
+          transition: .3s;
+}
+.css-list .article-box:before {
+  right: 37px;
+  background: -webkit-linear-gradient(135deg, rgba(125, 125, 125, .4) 50%, transparent 50%, transparent 100%);
+  background:         linear-gradient(-45deg, rgba(125, 125, 125, .4) 50%, transparent 50%, transparent 100%);
+  border-radius: 0;
+}
+.css-list .article-box:hover:after,
+.css-list .article-box:hover:before {
+  right: 0;
+  width: 0;
+  height: 0;
+}
+.css-list .article-time {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 100px;
+  height: 100px;
+  padding-top: 28px;
+  overflow: hidden;
   color: #fff;
-  background: -webkit-linear-gradient(top, #f5b043, #f39c12);
-  background:         linear-gradient(to bottom, #f5b043, #f39c12);
+  text-align: center;
+  background: #6fafa1;
+  border-radius: 50%;
+}
+.css-list .article-time:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  content: "";
+  background: #000;
+  opacity: .1;
+}
+.css-list .article-time .day {
+  display: block;
+  font-size: 40px;
+  line-height: 1em;
+}
+.css-list .article-time .year,
+.css-list .article-time .month {
+  font-size: 12px;
+}
+.css-list .article-author {
+  font-size: 14px;
+  line-height: 3;
+}
+.css-list .article-author:before {
+  padding-right: 10px;
+  content: "by";
+}
+.css-list .article-more {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #cc6248;
+  border-radius: 50%;
+}
+.css-list .article-more span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 5px;
+  margin: -2px 0 0 -20px;
+  background: #fff;
+  border-radius: 3px;
+}
+.css-list .article-more span:before,
+.css-list .article-more span:after {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  width: 20px;
+  height: 5px;
+  content: "";
+  background: #fff;
+  border-radius: 3px;
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+  -webkit-transform-origin: 100% 50%;
+      -ms-transform-origin: 100% 50%;
+          transform-origin: 100% 50%;
+}
+.css-list .article-more span:after {
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.css-list .article-more:before {
+  display: block;
+  width: 100%;
+  height: 50%;
+  content: "";
+  background: #000;
+  opacity: .1;
+}
+@media only screen and (max-width: 1500px) {
+  .css-list .article-box {
+    width: 570px;
+  }
 }
 /* 短语效果 */
 .phrase-area {
@@ -1319,7 +1585,7 @@ a:link {
 }
 /* about效果 */
 .about-area {
-  min-height: 100%;
+  height: 100%;
   color: #2c3e50;
   background: -webkit-linear-gradient(63deg, #ebebeb 5px, transparent 5px) 0 5px, -webkit-linear-gradient(243deg, #ebebeb 5px, transparent 5px) 10px 0, -webkit-linear-gradient(63deg, #dedede 5px, transparent 5px) 0 10px, -webkit-linear-gradient(243deg, #dedede 5px, transparent 5px) 10px 5px, -webkit-linear-gradient(0deg, #e3e3e3 10px, transparent 10px), -webkit-linear-gradient(#e3e3e3 25%, #e6e6e6 25%, #e6e6e6 50%, transparent 50%, transparent 75%, #dbdbdb 75%, #dbdbdb);
   background:         linear-gradient(27deg, #ebebeb 5px, transparent 5px) 0 5px, linear-gradient(207deg, #ebebeb 5px, transparent 5px) 10px 0, linear-gradient(27deg, #dedede 5px, transparent 5px) 0 10px, linear-gradient(207deg, #dedede 5px, transparent 5px) 10px 5px, linear-gradient(90deg, #e3e3e3 10px, transparent 10px), linear-gradient(#e3e3e3 25%, #e6e6e6 25%, #e6e6e6 50%, transparent 50%, transparent 75%, #dbdbdb 75%, #dbdbdb);

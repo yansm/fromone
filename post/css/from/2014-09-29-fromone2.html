@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html> 
+	<head>  
+		<meta charset="utf-8" />    
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<title>fromone | to be unique</title> 
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/reset.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/common.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/zxx.lib.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/lib/jscrollpane/jquery.jscrollpane.css"></link>
+		<link rel="stylesheet" href="/fromone/stylesheets/fromone.css"></link>
+		<script src="/fromone/lib/react.js"></script>
+		<script src="/fromone/lib/jquery-1.10.2.min.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.mousewheel.js"></script>
+		<script src="/fromone/lib/jscrollpane/mwheelIntent.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.jscrollpane.min.js"></script>
+		<script src="/fromone/lib/lodash.min.js"></script>	
+		<script src="/fromone/map_post.js"></script>	
+		<script src="/fromone/lib/fromreact.js"></script>	
+		<script src="/fromone/lib/fromone.debug.js"></script>	
+	</head>
+	
+		<!-- main-screen -->
+			<body class="css-page" data-model="css-page" data-level="2" data-type="page" data-url="post\css\from\2014-09-29-fromone2"><div id="page" style="display: block"><div class="css-page-area"><div class="mainbody-area"><div class="close-angle" click-target="change-btn" data-model="css" data-url="css"><span></span></div><div class="mainbody-box"><section class="mainbody-item"><h4 class="mainbody-title">做一个略调皮的个人主页--结构篇</h4><aside class="mainbody-info"><span class="mainbody-author">依旧沉睡</span><span class="mainbody-time">2014-09-29</span></aside><div class="mainbody-content"><fromone-main>
+
+<p><a href="http://www.gbtags.com/gb/share/3971.htm" target="_blank">极客标签文章链接</a></p>
+<p><img src="./images/2015-09-28-1.jpg" alt="img"></p>
+<p>首先感谢大家这么给面子，看到评论我也特别的开心。</p>
+<p>不过要实现声明一下，之前忘记说了，这个设计的灵感来自于某设计公司给某银行做的办理系统的一张宣传图，当初看到的时候就特别的喜欢，就拿来做为自己的个人主页啦，大家看到的第一眼就是那张宣传图，之后的动态效果以及别的页面就都是自己的东西啦。</p>
+<p><a  href="http://yansm.github.io/fromzero/" target="_blank">我的个人主页</a></p>
+<p>源码是挂在git上的，大家可以随便下。    </p>
+<p><a class="prettyprint" href="https://github.com/yansm/fromzero/tree/gh-pages" target="_blank">源码</a></p>
+<p>如果有git的，记得给星哦<del>~</del>~</p>
+<p>这里说一下整体的结构情况。首先总共有七个菜单以及五个区域，如下代</p>
+<pre><code>/*七个菜单*/
+&lt;ul class=&quot;indexMenu&quot;&gt;
+&lt;li data-type=&quot;normal&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-home&quot;&gt;&lt;/span&gt;&lt;em class=&quot; rel&quot;&gt;我的主页&lt;/em&gt;&lt;/li&gt;
+&lt;li data-type=&quot;left&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-user &quot;&gt;&lt;/span&gt;&lt;em class=&quot; rel&quot;&gt;我的信息&lt;/em&gt;&lt;/li&gt;
+&lt;li data-type=&quot;top&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-picture &quot;&gt;&lt;/span&gt;&lt;em class=&quot; rel&quot;&gt;我的相册&lt;/em&gt;&lt;/li&gt;
+&lt;li data-type=&quot;right&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-pencil &quot;&gt;&lt;/span&gt;&lt;em class=&quot; rel&quot;&gt;我的随笔&lt;/em&gt;&lt;/li&gt;
+&lt;li data-type=&quot;bottom&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-film &quot;&gt;&lt;/span&gt;&lt;em class=&quot; rel&quot;&gt;我的临摹网站&lt;/em&gt;&lt;/li&gt;
+&lt;li data-type=&quot;left&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-folder-open &quot;&gt;&lt;/span&gt;&lt;em class=&quot; rel&quot;&gt;我的工作经历&lt;/em&gt;&lt;/li&gt;
+&lt;li data-type=&quot;right&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-send &quot;&gt;&lt;/span&gt;&lt;em class=&quot; rel&quot;&gt;我的游戏&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+/*五个区域*/
+&lt;section class=&quot;area_main abs ovh&quot;&gt;&lt;/section&gt;
+&lt;section class=&quot;area_right abs&quot;&gt;&lt;/section&gt;
+&lt;section class=&quot;area_left abs&quot;&gt;&lt;/section&gt;
+&lt;section class=&quot;area_top abs&quot;&gt;&lt;/section&gt;
+&lt;section class=&quot;area_bottom abs&quot;&gt;&lt;/section&gt;
+</code></pre><p>所以有的区域就会要展现两个以上的内容（如有两个left形态以及两个right形态）。所以呢，这里需要进行一下控制，由于其他菜单的内容也很多，所以在第一次点击其他菜单的时候用了一下ajax来load进要展现的页面。</p>
+<p>整体我闭了两个包，一个是主页的事件控制，一个是分页的事件控制，然后再load的回调方法里去运行对应的分页控制js代码。</p>
+<p> 每次点击的时候都做一次判断，判断页面是否已经插入，如果没有，就进行load，如果有，就正常打开。</p>
+<p>具体代码如下：</p>
+<pre><code>/* 主页菜单点击动作 */
+.click(function () {
+    var $this = $(this), type = $this.data(&#39;type&#39;), target = $this.data(&#39;target&#39;)
+        , $area = $(&#39;.area_&#39;+ type),flag = $area.data(&#39;flag&#39;) ? $area.data(&#39;flag&#39;) : &#39;&#39;;
+    if(target &amp;&amp; $area.find(&#39;.box_&#39;+ target).length == 0) {
+        $area.append(&#39;&lt;div class=&quot;scroll-pane box box_&#39;+ target +&#39;&quot;&gt;&lt;/div&gt;&#39;);
+        $area.find(&#39;.box_&#39;+ target).load(target+ &quot;.html&quot;,function () {
+            $area.find(&#39;.box_&#39;+ target).jScrollPane();
+            $.initModule({target : target});
+        });    
+    }
+    if(target){
+        $area.data(&#39;flag&#39;,target).find(&#39;&gt; * &#39;).removeClass(&#39;active&#39;);
+        $area.find(&#39;.box_&#39;+ target).addClass(&#39;active&#39;);
+    }
+    if($body.hasClass(&#39;type_&#39;+ type) &amp;&amp; flag == target) return;
+    menuClickType[type]();
+});
+</code></pre><p>这里用到了一个滚动条的插件——jScrollPane </p>
+<p>这里逻辑可能有些乱，一共是两个flag，一个是target，一个是type，type是区域的标识，target是内容的标识。</p>
+<p>如果找不到 box_target 这个元素，那么就加一个，然后用ajax 来 load 进 target.html 这个页面，然后在回调方法 init 对应的方法即可。</p>
+<p>分页的构造如下：</p>
+<pre><code>/*  区域js加载 */
+$(function () {
+    var moduleMap = {
+        &#39;myInformation&#39; : myInformation
+        ,&#39;myPhotos&#39; : myPhotos
+        ,&#39;myArticle&#39; : myArticle
+        ,&#39;myRecode&#39; : myRecode
+        ,&#39;myWork&#39; : myWork
+        ,&#39;myGame&#39; : myGame
+    }
+
+    $.extend({
+        initModule : function (settings) {
+            var target = settings.target;
+            moduleMap[target]();
+        }
+    });
+        /* 我的信息 js 加载 */
+    function myInformation() {} 
+        ······
+}    
+</code></pre><p>这样，整个页面的大体构造就完成了，以后的编写代码只需要在对应的html以及function里书写即可。</p>
+<p>注意的是首页是直接写在里面的。就不需要再加新的页了。
+</fromone-main></p>
+</div><div class="mainbody-comment"></div></section></div></div></div></div>
+		<ul class="full-screen">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="loading-area">
+			<div class="spinner">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>	
+				<div></div>
+				<div></div>
+				<aside>loading</aside>
+			</div>
+		</div>
+		<div class="modal-area">
+			<div class="modal-box">
+			     <!-- <iframe src="https://changyan.sohu.com/api/oauth2/authorize?client_id=cyrCA2YHb&redirect_uri=http://yansm.github.io/fromone/checkOAUTH.html&response_type=code&platform_id=3"> -->
+			</div>
+		</div>
+	</body>
+	
+</html>
+    

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html> 
+	<head>  
+		<meta charset="utf-8" />    
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<title>fromone | to be unique</title> 
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/reset.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/common.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/zxx.lib.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/lib/jscrollpane/jquery.jscrollpane.css"></link>
+		<link rel="stylesheet" href="/fromone/stylesheets/fromone.css"></link>
+		<script src="/fromone/lib/react.js"></script>
+		<script src="/fromone/lib/jquery-1.10.2.min.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.mousewheel.js"></script>
+		<script src="/fromone/lib/jscrollpane/mwheelIntent.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.jscrollpane.min.js"></script>
+		<script src="/fromone/lib/lodash.min.js"></script>	
+		<script src="/fromone/map_post.js"></script>	
+		<script src="/fromone/lib/fromreact.js"></script>	
+		<script src="/fromone/lib/fromone.debug.js"></script>	
+	</head>
+	
+		<!-- main-screen -->
+			<body class="css-page" data-model="css-page" data-level="2" data-type="page" data-url="post\css\animation\2014-11-09-shizhongdemo"><div id="page" style="display: block"><div class="css-page-area"><div class="mainbody-area"><div class="close-angle" click-target="change-btn" data-model="css" data-url="css"><span></span></div><div class="mainbody-box"><section class="mainbody-item"><h4 class="mainbody-title">网上常见的一个时钟~</h4><aside class="mainbody-info"><span class="mainbody-author">依旧沉睡</span><span class="mainbody-time">2014-11-09</span></aside><div class="mainbody-content"><fromone-main>
+
+<p><a href="http://www.gbtags.com/gb/share/4152.htm" target="_blank">极客标签文章链接</a></p>
+<p>完整效果请去极客标签查看~</p>
+<p><img src="./images/2014-11-09-1.png" alt="img"> </p>
+<p>突然觉得自己对带工作的态度亟需改正，虽然不喜欢现在的加班生活，但是自己要去接受自己不喜欢的，才能获得自己喜欢的。</p>
+<p>这是自己好久之前丛过的一个时钟，网上应该有这个的教程，虽然实现的效果都相同，不过机制是有差别的。</p>
+<p>虽然图片是借的，是一整个圆，不过我只用了半个，没切···，还有浏览器只看了chrome···，太懒了···</p>
+<p>首先他有一个一个永远在右侧的半圆，以及一个永远在动的半圆，当走刚开始的半圆的时候，隐藏右侧的半圆，当要走左侧的半圆的时候，显示右侧的半圆，恩··· 就是小于180度的时候，只显示那个在动的半圆，当移动超过180的时候，把右侧的半圆显示出来，在动的园继续大于180的运动，就ok了。</p>
+<p>由于做了不同的时钟，所以把获取时间提成一个公共。</p>
+<pre><code>$.fn.getTime = function () {
+
+    var date = new Date(),hour = date.getHours(),min = date.getMinutes(),sec = date.getSeconds();    
+    return {hour : hour, min : min, sec : sec}
+}
+</code></pre><p> 每个圆圈的html代码：</p>
+<pre><code>&lt;div class=&quot;hour_area&quot; data-flag=&quot;hour&quot;&gt;
+    &lt;div class=&quot;left_clock_area&quot;&gt;
+        &lt;div class=&quot;left_clock&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;left_bg&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;right_clock_area&quot;&gt;
+        &lt;div class=&quot;right_clock&quot;&gt;&lt;/div&gt; 
+    &lt;/div&gt;
+    &lt;div class=&quot;time_area&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>每个圆圈都是一样的，只不过各自加了一个data-flag,作为区别，js代码获取这个data-flag，然后获取getTime里面相应的数据做分析。</p>
+<pre><code>if(num &gt; 30 ) {
+    $leftBg.css(&#39;width&#39; , &#39;50%&#39;).hide();
+    $rightClick.show();
+}else if(num &lt; 30 ){
+    $leftBg.css(&#39;width&#39; , &#39;50%&#39;).show();
+    $rightClick.hide();
+}
+</code></pre><p>然后在一个setInterval里去调取这些代码即可。
+</fromone-main></p>
+</div><div class="mainbody-comment"></div></section></div></div></div></div>
+		<ul class="full-screen">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="loading-area">
+			<div class="spinner">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>	
+				<div></div>
+				<div></div>
+				<aside>loading</aside>
+			</div>
+		</div>
+		<div class="modal-area">
+			<div class="modal-box">
+			     <!-- <iframe src="https://changyan.sohu.com/api/oauth2/authorize?client_id=cyrCA2YHb&redirect_uri=http://yansm.github.io/fromone/checkOAUTH.html&response_type=code&platform_id=3"> -->
+			</div>
+		</div>
+	</body>
+	
+</html>
+    

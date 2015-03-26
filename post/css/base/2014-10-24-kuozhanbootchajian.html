@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html> 
+	<head>  
+		<meta charset="utf-8" />    
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<title>fromone | to be unique</title> 
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/reset.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/common.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/zxx.lib.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/lib/jscrollpane/jquery.jscrollpane.css"></link>
+		<link rel="stylesheet" href="/fromone/stylesheets/fromone.css"></link>
+		<script src="/fromone/lib/react.js"></script>
+		<script src="/fromone/lib/jquery-1.10.2.min.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.mousewheel.js"></script>
+		<script src="/fromone/lib/jscrollpane/mwheelIntent.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.jscrollpane.min.js"></script>
+		<script src="/fromone/lib/lodash.min.js"></script>	
+		<script src="/fromone/map_post.js"></script>	
+		<script src="/fromone/lib/fromreact.js"></script>	
+		<script src="/fromone/lib/fromone.debug.js"></script>	
+	</head>
+	
+		<!-- main-screen -->
+			<body class="css-page" data-model="css-page" data-level="2" data-type="page" data-url="post\css\base\2014-10-24-kuozhanbootchajian"><div id="page" style="display: block"><div class="css-page-area"><div class="mainbody-area"><div class="close-angle" click-target="change-btn" data-model="css" data-url="css"><span></span></div><div class="mainbody-box"><section class="mainbody-item"><h4 class="mainbody-title">扩展一个boot的插件——tooltip & 做一个基于boot的表达验证</h4><aside class="mainbody-info"><span class="mainbody-author">依旧沉睡</span><span class="mainbody-time">2014-10-24</span></aside><div class="mainbody-content"><fromone-main>
+
+<p><a href="http://www.gbtags.com/gb/share/4042.htm" target="_blank">极客标签文章链接</a></p>
+<p>完整效果请去极客标签查看~</p>
+<p>加班，加班加班，我爱加班··· 我已经疯了，哦也。</p>
+<p>这次发一个刚接触boot的时候用boot做的表单验证，我们扩展一下tooltip的插件，让他可以换颜色。</p>
+<p>其实挺简单的，主要是考究代码阅读的能力。</p>
+<p>boot的代码写的很简单，能省略“;”的地方就省略掉了，而且他的闭包也很有意思</p>
+<pre><code>+function($){
+}(jQuery);
+</code></pre><p>这种写法等同于</p>
+<pre><code>(function($){
+})(jQuery);
+</code></pre><p>少些一个符号，比较节俭。</p>
+<p>他的对外接口写的就比较正常了：</p>
+<pre><code>$.fn.tooltip = function (option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data(&#39;bs.tooltip&#39;)
+      var options = typeof option == &#39;object&#39; &amp;&amp; option
+
+      if (!data) $this.data(&#39;bs.tooltip&#39;, (data = new Tooltip(this, options)))
+      if (typeof option == &#39;string&#39;) data[option]()
+    })
+  }
+</code></pre><p>return就好像一个构造函数，.each 让方法对到每个dom上而不是dom数组。这里new一个Tooltip方法，所有的操作多在这个Tooltip中，应用prototype，把方法细分到细分，尽量原子化方法，做一个面向对象的js方法。</p>
+<p> 大体的架构就是这个样子的了。我们需要做的就是加一个参数，然后再应用到这个参数。</p>
+<p> 首先我们先给它的默认参数里面加一个：</p>
+<pre><code> Tooltip.DEFAULTS = {
+    animation: true
+  , placement: &#39;right&#39;
+  , selector: false
+  , template: &#39;&lt;div class=&quot;tooltip&quot;&gt;&lt;div class=&quot;tooltip-arrow&quot;&gt;&lt;/div&gt;&lt;div class=&quot;tooltip-inner&quot;&gt;&lt;/div&gt;&lt;/div&gt;&#39;
+  , trigger: &#39;hover focus&#39;
+  , title: &#39;&#39;
+  , delay: 0
+  , html: false
+  , container: false
+  , bgcolor: &#39;#000000&#39;  //后添加的颜色属性
+  }
+</code></pre><p>然后在我们调取它的方法时候，也同样加进去这个属性：  </p>
+<pre><code>$this.tooltip(&#39;destroy&#39;).tooltip({
+    placement : &quot;right&quot;
+    ,trigger : &quot;focus&quot;
+    ,bgcolor : stateColor[state]  //我们自己定义的一个颜色
+    ,title : title
+});
+</code></pre><p>然后我们给的参数和他默认的参数会在初始化的时候合在 一起：</p>
+<pre><code>Tooltip.prototype.getOptions = function (options) {
+    options = $.extend({}, this.getDefaults(), this.$element.data(), options)  //合并两个数组
+
+    if (options.delay &amp;&amp; typeof options.delay == &#39;number&#39;) {
+      options.delay = {
+        show: options.delay
+      , hide: options.delay
+      }
+    }
+
+    return options
+  }
+</code></pre><p> 这个方法在tooltip的init方法里会被调用 ：</p>
+<pre><code>Tooltip.prototype.init = function (type, element, options) {
+        this.enabled  = true
+        this.type     = type
+        this.$element = $(element)
+        this.options  = this.getOptions(options) //获取options
+
+        //以下省略
+    }
+</code></pre><p> 它内部对内容和箭头有特定的命名：$tip 和 $arrow;找了半天，觉得在插入内容的时候，我们来改颜色最好，所以有了下面的代码：</p>
+<pre><code>Tooltip.prototype.setContent = function () {
+    var $tip  = this.tip()
+    var title = this.getTitle()
+    var $arrow = this.arrow()
+    $tip.find(&#39;.tooltip-inner&#39;)[this.options.html ? &#39;html&#39; : &#39;text&#39;](title).css(&quot;background-color&quot;,this.options.bgcolor)  //这里设定内容的背景色
+    $arrow.css(&quot;border-&quot;+this.options.placement+&quot;-color&quot;,this.options.bgcolor)  //这里设定箭头的背景色,this.options.placement 是之前设定的方向
+    $tip.removeClass(&#39;fade in top bottom left right&#39;)
+  }
+</code></pre><p> 这样tooltip的扩展就做好啦。</p>
+<p>之后我们就可以用他来做一个简单的表单验证啦。</p>
+<p>效果见代码演示。
+</fromone-main></p>
+</div><div class="mainbody-comment"></div></section></div></div></div></div>
+		<ul class="full-screen">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="loading-area">
+			<div class="spinner">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>	
+				<div></div>
+				<div></div>
+				<aside>loading</aside>
+			</div>
+		</div>
+		<div class="modal-area">
+			<div class="modal-box">
+			     <!-- <iframe src="https://changyan.sohu.com/api/oauth2/authorize?client_id=cyrCA2YHb&redirect_uri=http://yansm.github.io/fromone/checkOAUTH.html&response_type=code&platform_id=3"> -->
+			</div>
+		</div>
+	</body>
+	
+</html>
+    

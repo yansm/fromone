@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html> 
+	<head>  
+		<meta charset="utf-8" />    
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<title>fromone | to be unique</title> 
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/reset.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/common.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/zxx.lib.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/lib/jscrollpane/jquery.jscrollpane.css"></link>
+		<link rel="stylesheet" href="/fromone/stylesheets/fromone.css"></link>
+		<script src="/fromone/lib/react.js"></script>
+		<script src="/fromone/lib/jquery-1.10.2.min.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.mousewheel.js"></script>
+		<script src="/fromone/lib/jscrollpane/mwheelIntent.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.jscrollpane.min.js"></script>
+		<script src="/fromone/lib/lodash.min.js"></script>	
+		<script src="/fromone/map_post.js"></script>	
+		<script src="/fromone/lib/fromreact.js"></script>	
+		<script src="/fromone/lib/fromone.debug.js"></script>	
+	</head>
+	
+		<!-- main-screen -->
+			<body class="css-page" data-model="css-page" data-level="2" data-type="page" data-url="post\css\base\2014-10-22-xuanzeqi"><div id="page" style="display: block"><div class="css-page-area"><div class="mainbody-area"><div class="close-angle" click-target="change-btn" data-model="css" data-url="css"><span></span></div><div class="mainbody-box"><section class="mainbody-item"><h4 class="mainbody-title">做一个略调皮的个人主页--游戏篇</h4><aside class="mainbody-info"><span class="mainbody-author">依旧沉睡</span><span class="mainbody-time">2014-10-22</span></aside><div class="mainbody-content"><fromone-main>
+
+<p><a href="http://www.gbtags.com/gb/share/4036.htm" target="_blank">极客标签文章链接</a></p>
+<p>完整效果请去极客标签查看~</p>
+<p>css的选择器的顺序其实很有意思，如果应用的好的话，可以做一些简单的逻辑出来，配合上css3，就可以尽可能的脱离js了。</p>
+<p>这里的演示是一个带有hover事件的四张照片，效果来自一个国外优秀单页，我在recode的时候做的，看源码他应该是用的js，我这里改成了css做，正好可以演示一下css选择器的顺序技巧。</p>
+<p>首先是li标签的样式，这里就不说了，主要说一下hover的操作。</p>
+<p>显示ul的hover，让所有的li标签缩短宽度。</p>
+<p>.dynamic_photo_album:hover &gt;li {width:258px}
+ 然后是当li标签的hover，让所hover的li标签扩展。还有加颜色。</p>
+<p>.dynamic_photo_album &gt; li:hover{-webkit-filter: grayscale(0); -moz-filter: grayscale(0); -ms-filter: grayscale(0); -o-filter: grayscale(0); filter: grayscale(0);width:526px}
+ 加颜色用filter，这东西挺乱的，参数大家自己查一下吧。</p>
+<p>你看，只是：hover的顺序改变了，却又很大的不同，而且效果也很不错~ 有时间出代码录播~</p>
+<p>ps:最近有朋友下我那个主页的源码，说除了主页其余的内页没内容，这个是因为大多数浏览器对ajax load 操作本地文件不支持，要么架一个apache什么的服务器，要么就用Firefox浏览器，都是可以的~
+</fromone-main></p>
+</div><div class="mainbody-comment"></div></section></div></div></div></div>
+		<ul class="full-screen">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="loading-area">
+			<div class="spinner">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>	
+				<div></div>
+				<div></div>
+				<aside>loading</aside>
+			</div>
+		</div>
+		<div class="modal-area">
+			<div class="modal-box">
+			     <!-- <iframe src="https://changyan.sohu.com/api/oauth2/authorize?client_id=cyrCA2YHb&redirect_uri=http://yansm.github.io/fromone/checkOAUTH.html&response_type=code&platform_id=3"> -->
+			</div>
+		</div>
+	</body>
+	
+</html>
+    

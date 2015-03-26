@@ -3,7 +3,9 @@
 body,
 input,
 textarea,
-select {
+select,
+pre,
+code {
   font-family: Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
   font-size: 16px;
   color: #333;
@@ -13,10 +15,26 @@ textarea,
 select {
   font-size: 14px;
 }
+pre,
+code {
+  font-family: "DejaVu Sans Mono", Menlo, Consolas, "Droid Sans Mono", "source-code-pro", monospace, Microsoft Yahei, Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+  font-size: 13px;
+  text-shadow: 0 0 0;
+}
 a:hover,
 a:active,
 a:link {
   text-decoration: none;
+}
+pre {
+  /* word-wrap: break-word; break-word: break-all; */
+  padding: 20px;
+  overflow: auto;
+  color: #f8f8f2;
+  background: #3a3c42;
+}
+code {
+  color: #f8f8f2;
 }
 * {
   outline: 0;
@@ -640,10 +658,19 @@ a:link {
   padding: 8px 0;
 }
 .mainbody-content img {
-  max-width: 100%;
+  max-width: 80%;
 }
 .mainbody-content:first-letter {
   font-size: 2em;
+  color: #1abc9c;
+}
+.mainbody-content a {
+  line-height: 1.7;
+  color: #666;
+  text-decoration: none;
+  border-bottom: 1px solid #1abc9c;
+}
+.mainbody-content a:hover {
   color: #1abc9c;
 }
 .comment-btn:hover {
@@ -1002,6 +1029,9 @@ a:link {
 .css-area .jspVerticalBar {
   z-index: 2;
 }
+.css-area .more-btn {
+  border-bottom-color: #cc6248;
+}
 .css-left-logo {
   padding: 36px 0;
   margin-bottom: 28px;
@@ -1254,7 +1284,13 @@ a:link {
   padding-right: 10px;
   content: "by";
 }
-.css-list .article-more {
+@media only screen and (max-width: 1500px) {
+  .css-list .article-box {
+    width: 570px;
+  }
+}
+.css-list .article-more,
+.css-page-area .close-angle {
   position: absolute;
   right: 16px;
   bottom: 16px;
@@ -1265,7 +1301,8 @@ a:link {
   background: #cc6248;
   border-radius: 50%;
 }
-.css-list .article-more span {
+.css-list .article-more span,
+.css-page-area .close-angle span {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1276,7 +1313,9 @@ a:link {
   border-radius: 3px;
 }
 .css-list .article-more span:before,
-.css-list .article-more span:after {
+.css-page-area .close-angle span:before,
+.css-list .article-more span:after,
+.css-page-area .close-angle span:after {
   position: absolute;
   top: 0;
   right: 2px;
@@ -1292,12 +1331,14 @@ a:link {
       -ms-transform-origin: 100% 50%;
           transform-origin: 100% 50%;
 }
-.css-list .article-more span:after {
+.css-list .article-more span:after,
+.css-page-area .close-angle span:after {
   -webkit-transform: rotate(-45deg);
       -ms-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
-.css-list .article-more:before {
+.css-list .article-more:before,
+.css-page-area .close-angle:before {
   display: block;
   width: 100%;
   height: 50%;
@@ -1305,10 +1346,99 @@ a:link {
   background: #000;
   opacity: .1;
 }
-@media only screen and (max-width: 1500px) {
-  .css-list .article-box {
-    width: 570px;
-  }
+.css-page-area .close-angle {
+  top: 48px;
+  right: 48px;
+  bottom: auto;
+  opacity: 1;
+}
+.css-page-area .close-angle:after {
+  display: none;
+}
+.css-page-area .close-angle:before {
+  top: 0;
+  left: 0;
+  -webkit-transform: rotate(0);
+      -ms-transform: rotate(0);
+          transform: rotate(0);
+}
+.css-page-area .close-angle span:before,
+.css-page-area .close-angle span:after {
+  left: 2px;
+  -webkit-transform-origin: 0 50%;
+      -ms-transform-origin: 0 50%;
+          transform-origin: 0 50%;
+}
+.css-page-area {
+  width: 100%;
+  height: 100%;
+}
+.css-page-area.current .mainbody-area {
+  background: #dddad3;
+  opacity: 1;
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+.css-page-area.current .mainbody-box {
+  overflow: auto;
+}
+.css-page-area .mainbody-area {
+  opacity: 0;
+  -webkit-transform: translate(-160px, 0);
+      -ms-transform: translate(-160px, 0);
+          transform: translate(-160px, 0);
+}
+.css-page-area .mainbody-title {
+  border-bottom-color: #cc6248;
+}
+.css-page-area .mainbody-box {
+  overflow: hidden;
+}
+.css-page-area .mainbody-content {
+  font-size: 15px;
+  text-shadow: 0 0 0	;
+}
+.css-page-area .mainbody-content:first-letter {
+  color: #cc6248;
+}
+.css-page-area .mainbody-content a {
+  border-bottom-color: #f39c12;
+}
+.css-page-area .mainbody-content a:hover {
+  color: #f39c12;
+}
+.css-page-area .mainbody-item {
+  position: relative;
+  padding: 64px 42px 0;
+  background: #f5f4ef;
+}
+.css-page-area .mainbody-item:before,
+.css-page-area .mainbody-item:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  width: 80px;
+  height: 80px;
+  content: "";
+  background: -webkit-linear-gradient(45deg, #fff 50%, #dddad3 50%, #dddad3 100%);
+  background:         linear-gradient(45deg, #fff 50%, #dddad3 50%, #dddad3 100%);
+  border-radius: 0 0 0 5px;
+  -webkit-transition: .3s;
+          transition: .3s;
+}
+.css-page-area .mainbody-item:before {
+  top: 77px;
+  background: -webkit-linear-gradient(225deg, rgba(125, 125, 125, .4) 50%, transparent 50%, transparent 100%);
+  background:         linear-gradient(-135deg, rgba(125, 125, 125, .4) 50%, transparent 50%, transparent 100%);
+  border-radius: 0;
+}
+.css-page-area .comment-btn:hover {
+  background: #cc6248;
+}
+.css-page-area .comment-input-box textarea {
+  background: #f5f4ef;
 }
 /* 短语效果 */
 .phrase-area {

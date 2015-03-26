@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html> 
+	<head>  
+		<meta charset="utf-8" />    
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<title>fromone | to be unique</title> 
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/reset.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/common.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/zxx.lib.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/lib/jscrollpane/jquery.jscrollpane.css"></link>
+		<link rel="stylesheet" href="/fromone/stylesheets/fromone.css"></link>
+		<script src="/fromone/lib/react.js"></script>
+		<script src="/fromone/lib/jquery-1.10.2.min.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.mousewheel.js"></script>
+		<script src="/fromone/lib/jscrollpane/mwheelIntent.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.jscrollpane.min.js"></script>
+		<script src="/fromone/lib/lodash.min.js"></script>	
+		<script src="/fromone/map_post.js"></script>	
+		<script src="/fromone/lib/fromreact.js"></script>	
+		<script src="/fromone/lib/fromone.debug.js"></script>	
+	</head>
+	
+		<!-- main-screen -->
+			<body class="css-page" data-model="css-page" data-level="2" data-type="page" data-url="post\css\from\2014-10-19-fromone4"><div id="page" style="display: block"><div class="css-page-area"><div class="mainbody-area"><div class="close-angle" click-target="change-btn" data-model="css" data-url="css"><span></span></div><div class="mainbody-box"><section class="mainbody-item"><h4 class="mainbody-title">做一个略调皮的个人主页--游戏篇</h4><aside class="mainbody-info"><span class="mainbody-author">依旧沉睡</span><span class="mainbody-time">2014-10-19</span></aside><div class="mainbody-content"><fromone-main>
+
+<p><a href="http://www.gbtags.com/gb/share/4002.htm" target="_blank">极客标签文章链接</a></p>
+<p><img src="./images/2015-09-28-7.jpg" alt="img"></p>
+<p>最近严重加班，非常严重··· </p>
+<p>万恶的discuz啊，还有万恶的环境问题，死了算了。</p>
+<p>这个应该是这个系列最后一篇啦，之后我会做另一个想法。主要是用来查看文章的一个主页，期间发些自己觉得好玩的东西出来。</p>
+<p>这一篇主要介绍一下我做的一个flappy bird。由于是自己js手写的，效率肯定不高，就当拿来玩的罢。浏览器不好回很卡哦。</p>
+<p>效果演示在这里：</p>
+<p><a href="http://yansm.github.io/fromzero/lib/flappyBird/index.html" target="_blank">flappy bird</a></p>
+<p>首先闭一个包，在里面写个向外接口：</p>
+<pre><code>$.fn.buildFlappyBird = function (settings) {
+    new flappyBird(settings);
+}
+var flappyBird = function (settings) {    
+    this.start();
+}
+</code></pre><p> 然后分步骤去实现这个东西。</p>
+<p>第一步，是解决自由落体，这个我们借用一下google在某年牛顿诞辰在主页上放的一个苹果自由落体的源码。去掉水平移动，</p>
+<pre><code>var v = -10,i = $.noop; 
+function aa(speed) {    
+    v=  speed || - 9;
+    i = setInterval(function () {bb();}, 25);  
+}  
+function bb() {  
+    var $bird= $(&#39;#flappy_bird&#39;);
+    var top =  $bird.offset().top , b = top + v;  
+    $bird.css( {&#39;top&#39; : b + &#39;px&#39;} );  
+    if (top &lt; 460) {  
+        v += 0.9;  
+    } else {  
+        v = 0;
+        $bird.css( {&#39;top&#39; : &#39;460px&#39;} );  
+        flappyBird.prototype.endGame();
+    }
+}
+</code></pre><p>把这个过程附在键盘事件上就ok了。像这样：</p>
+<pre><code>flappyBird.prototype.keyUp = function () {
+    if(!this.getSettings().ifStart){
+        this.getSettings().ifStart = true;
+        this.setState(true);
+        this.movePipe();
+        this.getWelcome().fadeOut();
+    }
+    if(!this.getState())return;
+    clearInterval(i);
+    aa();
+}
+</code></pre><p> 然后是柱子的移动和增加，移动整个是ul标签的移动，这个移动的时候会随着距离增加柱子，整个过程差不多就是这样。</p>
+<p>首先是移动柱子：</p>
+<pre><code>flappyBird.prototype.movePipe = function () {
+    var _this = this,leftFlag = 99999;
+    this.getSettings().moveEvent = setInterval(function () {
+        var $pipeBox = _this.getPipe(),state = _this.getState(),left = Number($pipeBox.css(&#39;left&#39;).replace(&#39;px&#39;, &#39;&#39;)) - 5,$pipeCurrent = $(&#39;.flappy_pipe[data-left=&quot;&#39;+ (0 - left) +&#39;&quot;]&#39;);
+        if(state){
+            $pipeBox.css({left : left + &#39;px&#39;});
+            if(left &lt; -200 &amp;&amp; left%200 == 0) _this.addPipe(left);                                                           //add管子
+            if((left + 120) &lt; -400 &amp;&amp; (left + 120)%200 == 0) _this.setIndex(_this.getIndex() + 1);            //计数器event
+            if($pipeCurrent.length &gt; 0) leftFlag = 0 - left;                                                                        //判断管子是否经过bird                
+            if(0 - left &gt; leftFlag &amp;&amp; 0 - left &lt; leftFlag + 87) _this.checkCollision(leftFlag);                        //经过event
+        }
+    },25);
+}
+</code></pre><p>当条件满足的时候，就增加柱子，增加柱子就是写进去一些html代码即可：</p>
+<pre><code>flappyBird.prototype.addPipe = function (left) {
+    var height = parseInt(Math.random()*320) + 40,$pipeBox = this.getPipe();
+    var html = &#39;&lt;div class=&quot;flappy_pipe&quot; data-left=&quot;&#39;+ (250 - left) +&#39;&quot; data-height=&quot;&#39;+ height +&#39;&quot; style=&quot;height:&#39;+ height +&#39;px;left:&#39; + (0 - left + 400) + &#39;px;&quot;&gt;&lt;/div&gt;&#39;;
+    $pipeBox.append(html);
+}
+</code></pre><p>之后是最后一步，验证碰撞，这个就是获取小鸟的top坐标，加上他本身的体积与柱子比较的过程。</p>
+<pre><code>flappyBird.prototype.checkCollision = function (leftFlag) {
+    var $pipe = $(&#39;.flappy_pipe[data-left=&quot;&#39;+ (leftFlag) +&#39;&quot;]&#39;),height = Number($pipe.attr(&#39;data-height&#39;)),$bird = this.getBird(),birdTop = $bird.offset().top;
+    if(birdTop &lt; height || birdTop &gt; height + 80) this.endGame();
+}
+</code></pre><p>这样其实大体的功能就实现了，之后就是增加个endgame呀，resetgame呀方法，让它可以重复玩，就ok啦。</p>
+<p>主要的思路就是拆分拆分再拆分，写出n个方法来在组装成一个，这样既可以复用，思路也会很明确。</p>
+<p>可能效率不是很好，毕竟自己只是想实现效果，好吧，本来对小效率这东西，研究的就不多，希望以后能够不断充实。哈哈。
+</fromone-main></p>
+</div><div class="mainbody-comment"></div></section></div></div></div></div>
+		<ul class="full-screen">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="loading-area">
+			<div class="spinner">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>	
+				<div></div>
+				<div></div>
+				<aside>loading</aside>
+			</div>
+		</div>
+		<div class="modal-area">
+			<div class="modal-box">
+			     <!-- <iframe src="https://changyan.sohu.com/api/oauth2/authorize?client_id=cyrCA2YHb&redirect_uri=http://yansm.github.io/fromone/checkOAUTH.html&response_type=code&platform_id=3"> -->
+			</div>
+		</div>
+	</body>
+	
+</html>
+    

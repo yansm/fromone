@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html> 
+	<head>  
+		<meta charset="utf-8" />    
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<title>fromone | to be unique</title> 
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/reset.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/common.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/zxx.lib.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/lib/jscrollpane/jquery.jscrollpane.css"></link>
+		<link rel="stylesheet" href="/fromone/stylesheets/fromone.css"></link>
+		<script src="/fromone/lib/react.js"></script>
+		<script src="/fromone/lib/jquery-1.10.2.min.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.mousewheel.js"></script>
+		<script src="/fromone/lib/jscrollpane/mwheelIntent.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.jscrollpane.min.js"></script>
+		<script src="/fromone/lib/lodash.min.js"></script>	
+		<script src="/fromone/map_post.js"></script>	
+		<script src="/fromone/lib/fromreact.js"></script>	
+		<script src="/fromone/lib/fromone.debug.js"></script>	
+	</head>
+	
+		<!-- main-screen -->
+			<body class="css-page" data-model="css-page" data-level="2" data-type="page" data-url="post\css\base\2014-12-17-xiangbootyiyagnbiancheng"><div id="page" style="display: block"><div class="css-page-area"><div class="mainbody-area"><div class="close-angle" click-target="change-btn" data-model="css" data-url="css"><span></span></div><div class="mainbody-box"><section class="mainbody-item"><h4 class="mainbody-title">像boot一样的去编程</h4><aside class="mainbody-info"><span class="mainbody-author">依旧沉睡</span><span class="mainbody-time">2014-12-17</span></aside><div class="mainbody-content"><fromone-main>
+
+<p><a href="http://www.gbtags.com/gb/share/4347.htm" target="_blank">极客标签文章链接</a></p>
+<p>最近在弄公司的一个东西，需要封装一些前端的模块，所以研究了一下bootstrap的写法，记录一下，当做分享，也算是自己的一份笔记。</p>
+<p>1： 闭包</p>
+<p>boot的闭包方式有点特别，普通的闭包是这样的：</p>
+<pre><code>(function ($) {
+
+})(jQuery)
+</code></pre><p> 这种写法是怕全局污染，把$封闭在自己的空间里，暴露在外面的只有jQuery，这样，如果用了别的也用$的控件，就可以避免冲突。</p>
+<p>而boot的闭包又有一些不同：</p>
+<pre><code>+function ($) {
+
+}(jQuery)
+</code></pre><p>这样写除了之前的好处，还有一点就是简洁，以及更重要的一点，避免之前的括号没有闭合，导致的冲突。这样，更加的独立，之前的包没有闭合也不会影响到这里。就好像保守的程序员，喜欢在个别的语句前，多家一个&quot;;&quot;，为的就是怕之前的语句与现在的语句合在了一起。</p>
+<p>2：冲突的避免</p>
+<p>除了控制jQuery中$的冲突，还要避免插件重名所带来的冲突。</p>
+<p>jQuery 有自己的避免$全局污染的方法，就是noConflict。他可以把变量过渡到别的符号上，或者只是把$收回，只暴露出jQuery来。</p>
+<p>而boot自己也有类似的冲突解决方法。</p>
+<p>下面是所有boot插件的格式，以alert为例：</p>
+<pre><code>+function($){
+
+  var old = $.fn.alert;
+
+  $.fn.alert = function (option) {}
+
+  $.fn.alert.Constructor = Alert;
+
+  $.fn.alert.noConflict = function () {
+    $.fn.alert = old;
+    return this;
+  }
+
+}(jQuery)
+</code></pre><p> 这样接入有一个别的alert控件，也叫做alert。那么我们就会把他储存到old里。然后在把他重新生命为自己的alert控件。</p>
+<p>如果在接下来，我们需要用之前的alert，那么就noConflict一下，这样，alert就又付给了之前的alert控件，也就是old。</p>
+<p>再把咱们自己写的alert返回出来。我们可以再给他付给别的空间名，这样两个就都可以用了。</p>
+<p>而且我们也可以用Constructor来查看现在alert究竟是哪个控件。</p>
+<p>3：on的使用</p>
+<p>boot很方便，有些控件是自动的绑定在了特定的元素上的。还是以alert为例。</p>
+<p>  var dismiss = &#39;[data-dismiss=&quot;alert&quot;]&#39;</p>
+<p>$(document).on(&#39;click.bs.alert.data-api&#39;, dismiss, Alert.prototype.close);</p>
+<p>这里就是on的用法，他可以监听整个document，然后在根据参数，冒泡到特定的元素上去，这样做的好处是，可以再元素未被渲染的情况下，就把事件绑定到上面去，这样做，不用ready，也可以对新生成的元素执行同样的事件。所以boot的空间，除了特定的一些（比如tooltip），都可以在写出来的同时，就可以应用，只需要给元素特定的属性。</p>
+<p>4：css3的兼容解决方案</p>
+<p>有时候，我们需要在动画效果结束后在来去调用一些函数，在我们用jquery的动画时，animate的done参数可以帮我们很好地解决这方面的事情，可是当我们的大部分动画，都应用了css3的时候，要怎么办呢。所以boot&#39;用了 一下这个方法：</p>
+<pre><code>+function ($) {
+  &#39;use strict&#39;;
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement(&#39;bootstrap&#39;)
+
+    var transEndEventNames = {
+      WebkitTransition : &#39;webkitTransitionEnd&#39;,
+      MozTransition    : &#39;transitionend&#39;,
+      OTransition      : &#39;oTransitionEnd otransitionend&#39;,
+      transition       : &#39;transitionend&#39;
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one(&#39;bsTransitionEnd&#39;, function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+</code></pre><p>他首先去问浏览器，是否支持transitionend这个属性，如果支持，那么我们在来做后续的操作，同样以alert为例：</p>
+<pre><code>$.support.transition &amp;&amp; $parent.hasClass(&#39;fade&#39;) ?
+  $parent
+    .one(&#39;bsTransitionEnd&#39;, removeElement)
+    .emulateTransitionEnd(Alert.TRANSITION_DURATION) :
+  removeElement()
+</code></pre><p> 首先$.support.transition，调用transitionEnd方法，看看是否支持这个属性，如果支持，那么就用one注册一次 transitionend，然后在用emulateTransitionEnd去调用一下，参数为这个css3动画的时间duration。这个时间之后去调用这次事件，就可以达成callback的形式。当然如果不支持这个属性，那么我们就直接执行callback，就ok了。</p>
+<p>5：trigger的应用</p>
+<p>trigger可以手动的触发事件，以modal控件为例，在之前的版本的控件中，当modal框弹出来的时候，底部主窗口的滚动条没有取消，所以在后续的控件中（大概3.0.3左右），用了自身的注册事件来避免这部分的小bug。代码如下：</p>
+<pre><code> $(document)
+.on(&#39;show.bs.modal&#39;,  &#39;.modal&#39;, function () { $(document.body).addClass(&#39;modal-open&#39;) })
+.on(&#39;hidden.bs.modal&#39;, &#39;.modal&#39;, function () { $(document.body).removeClass(&#39;modal-open&#39;) })
+</code></pre><p>他在每次点开modal框之前，也就是show事件中，给body添加class：modal-open，这个样式把overflow给hidden掉。再在关闭modal框之后，也就是hidden事件中，再把这个class给remove掉。</p>
+<p>这里注册了时间，那么哪里去触发呢？这就用到了trigger方法，在特定的地方</p>
+<p> var e = $.Event(&#39;shown.bs.modal&#39;, { relatedTarget: _relatedTarget })</p>
+<p> that.$element.trigger(e)</p>
+<p>这样就触发了事件。大部分的外部接口就是这样给出的。</p>
+<p>6：事件注销的技巧</p>
+<p>boot在事件注册的时候给了很多的后缀。比如 click.bs.alert，show.bs.modal。这样做事为了什么呢。</p>
+<p>加入我想取消掉alert的click事件。可是我不能把所有的click事件都取消掉，所以我们在off事件的时候，就要这样写：</p>
+<pre><code>$(document).off(&#39;click.bs.alert&#39;)
+</code></pre><p>如果我想注销掉全部的alert的事件，那么就要：</p>
+<pre><code>$(document).off(&#39;.bs.alert&#39;)
+</code></pre><p>同理，要是想注销掉全部的boot注册的时间 那么就要：</p>
+<pre><code>$(document).off(&#39;.bs&#39;)
+</code></pre><p>所以在注册时间时候，才要麻烦的加后缀，是为了我们之后的行为做准备的。这样写非常的有道理。</p>
+<p>7：api的使用</p>
+<p>boot给了我们简单的接口，但是没有给我们全部，可是其实我们是可以拿到的。</p>
+<p>boot把方法给了data。如下面：</p>
+<pre><code>$.fn.alert = function (option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data(&#39;bs.alert&#39;)
+
+      if (!data) $this.data(&#39;bs.alert&#39;, (data = new Alert(this)))
+      if (typeof option == &#39;string&#39;) data[option].call($this)
+    })
+  }
+</code></pre><p> 在alert的时候，首先检查元素中用没有alert这个data，有的话，则直接调用，没有的话才生成新的。</p>
+<p>那么其实我们可以这样做：</p>
+<pre><code>$(&#39;.alert&#39;).alert();
+var api = $(&#39;.alert&#39;).data(&#39;bs.alert&#39;);
+api.hide();
+</code></pre><p>这是和</p>
+<p>$(&#39;.alert&#39;).alert(&#39;hide&#39;);一样用的。</p>
+<p>8：proxy的应用</p>
+<p>proxy调用一个方法，切用参数取代方法中的this，好像我自己写的控件form就有这么一段：</p>
+<pre><code>this.$element.on(&#39;click&#39;,&#39;[data-formtype=&quot;reset&quot;]&#39;,$.proxy(function () {
+        this.reset();
+    }, this));
+</code></pre><p> 我用了$element冒泡到的data-formtype=reset的元素，那么this自然指向了它，它的click事件是调用方法本身的reset()事件，可是里面的this不是这个方法，那么我们就用proxy来指向当前方法的this。这个方法灵活运用，对于封装控件有很大作用。</p>
+<p>好啦，就写到这里啦，如果有什么错误本人概不负责，这只是我自己积累的一些错误，阿不，知识···</p>
+<p>如果哪里写的不对，希望得到指正，大家一起交流。
+</fromone-main></p>
+</div><div class="mainbody-comment"></div></section></div></div></div></div>
+		<ul class="full-screen">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="loading-area">
+			<div class="spinner">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>	
+				<div></div>
+				<div></div>
+				<aside>loading</aside>
+			</div>
+		</div>
+		<div class="modal-area">
+			<div class="modal-box">
+			     <!-- <iframe src="https://changyan.sohu.com/api/oauth2/authorize?client_id=cyrCA2YHb&redirect_uri=http://yansm.github.io/fromone/checkOAUTH.html&response_type=code&platform_id=3"> -->
+			</div>
+		</div>
+	</body>
+	
+</html>
+    

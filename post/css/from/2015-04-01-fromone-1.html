@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html> 
+	<head>  
+		<meta charset="utf-8" />    
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<title>fromone | to be unique</title> 
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/reset.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/common.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/stylesheets/zxx.lib.css"></link>
+		<link type="text/css" rel="stylesheet" href="/fromone/lib/jscrollpane/jquery.jscrollpane.css"></link>
+		<link rel="stylesheet" href="/fromone/stylesheets/fromone.css"></link>
+		<script src="/fromone/lib/react.js"></script>
+		<script src="/fromone/lib/jquery-1.10.2.min.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.mousewheel.js"></script>
+		<script src="/fromone/lib/jscrollpane/mwheelIntent.js"></script>
+		<script src="/fromone/lib/jscrollpane/jquery.jscrollpane.min.js"></script>
+		<script src="/fromone/lib/lodash.min.js"></script>	
+		<script src="/fromone/map_post.js"></script>	
+		<script src="/fromone/lib/fromreact.js"></script>	
+		<script src="/fromone/lib/fromone.debug.js"></script>	
+	</head>
+	
+		<!-- main-screen -->
+			<body class="css-page" data-model="css-page" data-level="2" data-type="page" data-url="post\css\from\2015-04-01-fromone-1"><div id="page" style="display: block"><div class="css-page-area"><div class="mainbody-area"><div class="close-angle" click-target="change-btn" data-model="css" data-url="css"><span></span></div><div class="mainbody-box"><section class="mainbody-item"><h4 class="mainbody-title">做一个略调皮的个人博客--菜单篇</h4><aside class="mainbody-info"><span class="mainbody-author">依旧沉睡</span><span class="mainbody-time">2015-04-01</span></aside><div class="mainbody-content"><fromone-main>
+
+<p><a href="http://www.gbtags.com/gb/share/4885.htm" target="_blank">极客标签文章链接</a></p>
+<p>周末的时候github好像被攻击了，.io的链接都打不开，吓死我了。</p>
+<p>总之欢迎大家访问我的个人博客。</p>
+<p>由于react native 发布了，很想去看一看，所以估计最近都没有时间去弄这个博客啦，无奈只能先发出一个半成品。</p>
+<p>里面js模块和相册模块还没有做，about模块刚做了一半，但是整体的效果是出来了的。</p>
+<p>先说一下整体结构吧~</p>
+<p>页面跳转用了pushstate 加 ajax，评论用了畅言的api 加上 react，前端集成用了grunt，博客是用markdown写的，为了一些特殊需求，自己试着改了一些grunt，这些地方刚好也算是对一些新技术的练习。整体还是jquery。不过这次比我的主页有一点改进，图片我都进行压缩了···</p>
+<p>写这些算是对自己这段时间的一次总结好了。</p>
+<p>先将一下菜单样式，跳转机制。</p>
+<p>首页的菜单样式如下(less)：</p>
+<pre><code>.index-nav{
+    width:120px;height:120px;line-height:120px;color:#fff;font-size:26px;margin-top:20px;position:relative;cursor:pointer;
+    &amp;:before{content:&quot;&quot;;width:90%;height:90%;display:block;position:absolute;margin:5%;border-radius:50%;border:0;border:4px solid transparent;border-top:4px solid #fff;transform:rotate(-45deg);
+        transition:.5s
+    }
+    &amp;:hover{
+        color:#fff;
+        &amp;:before{transform:rotate(135deg);}
+    }
+}
+</code></pre><p>然后我们需要进行跳转，这里把参数都写在元素里：</p>
+<pre><code>&lt;div class=&quot;index-nav index-nav-02&quot; click-target=&quot;change-btn&quot; data-level=&quot;1&quot; data-type=&quot;bottom&quot; data-model=&quot;css&quot; data-url=&quot;css&quot;&gt;css&lt;/div&gt;
+&lt;div class=&quot;index-nav index-nav-03&quot; click-target=&quot;change-btn&quot; data-level=&quot;1&quot; data-type=&quot;top&quot; data-model=&quot;essay&quot; data-url=&quot;essay&quot;&gt;随笔&lt;/div&gt;
+&lt;div class=&quot;index-nav index-nav-04&quot; click-target=&quot;change-btn&quot; data-level=&quot;1&quot; data-type=&quot;bottom&quot; data-model=&quot;phrase&quot; data-url=&quot;phrase&quot;&gt;短语&lt;/div&gt;
+</code></pre><p>然后绑定点击事件：</p>
+<pre><code>$(document)
+    .on(&#39;click&#39;,&#39;[click-target=&quot;change-btn&quot;]&#39;,function () {
+        var data = $.extend({},{level:&#39;1&#39;},$(this).data());
+        setPageState(data); 
+    })
+</code></pre><p>这里把点击事件用on定义在document上。避免一些不必要的麻烦。它把参数取到，然后在setPageState方法里组成页面的url以及跳转方式的参数，并调取相应的方法。</p>
+<p>然后页面跳转，用到了pushstate。它可以实现无刷新的跳转，整体的思路就是他负责改路径，然后具体的改页面的方式 交给你来处理。</p>
+<p>我的实现思路就是，先用grunt的模板功能（也许以后会详细写）让所有的页面都是同一个“壳子”,只有里面的具体内容不一样，这个壳子有head信息，有css样式，js文件，以及都要用到的跳转时出现的大部分蒙版。</p>
+<p>然后当用pushstate改变了路径时，就用jquery的ajaxload，只更改内容不一样的部分，这样无刷新行程的页面就和你刷新之后形成的页面是一样的了。</p>
+<p>当然，由于我的这个页面有些复（ling）杂（luan）,所以定义了三个容纳内容的地方。</p>
+<p>具体代码就是：</p>
+<pre><code>/* 设置页面 */ 
+var setPageState = function (data,flag) {
+    if(!(data &amp;&amp; data.level &amp;&amp; data.model)) data = DEFAULT_STATE;
+    var url = $.setUrlWidthVars(data,PATH);
+
+    if(flag) {history.replaceState(data,&#39;&#39;,url); return;}
+    history.pushState(data,&#39;&#39;,url);
+    buildPage(data);
+}
+
+/* 来一发略复杂的建立页面的大事件！！！！ */
+var buildPage = function (data) {
+    var l_state = $body.data(), n_state = data;
+    if(!(l_state &amp;&amp; l_state.level  &amp;&amp; l_state.model)) l_state = DEFAULT_STATE;
+    if(!(n_state &amp;&amp; n_state.level  &amp;&amp; n_state.model)) n_state = DEFAULT_STATE;
+    var l_level = l_state.level,n_level = n_state.level;
+    //show animate 
+    if(l_level == n_level &amp;&amp; l_state.model == n_state.model) return;
+    var flag = &#39;hide&#39;;
+    l_state[&#39;type&#39;] = n_state[&#39;type&#39;] = &#39;bottom&#39;;
+    if(l_level &gt; n_level) { 
+        flag = &#39;down&#39;;
+        l_state[&#39;type&#39;] = &#39;page&#39;;
+    }else if(l_level &lt; n_level) {
+        flag = &#39;up&#39;;
+        n_state[&#39;type&#39;] = &#39;page&#39;;
+    }
+    var le = $.Event(flag+&#39;.&#39;  + l_state.model ,{l_state: l_state, n_state : n_state});
+    console.debug(flag+&#39;.&#39;  + l_state.model );
+    $body.trigger(le);
+} 
+</code></pre><p>这里把所有触发的事件都绑定在了body身上，有就调用，没有就拉倒，用来处理不同的行为。</p>
+<p>然后我们要监听前进和后退按钮：</p>
+<pre><code>/* 绑定popstate 事件 */
+window.addEventListener(&quot;popstate&quot;, function(e) {
+    if(!e.state) return; 
+    buildPage(e.state);
+}); 
+</code></pre><p>注意一下，较早版本的chrome以及safari会在刷新的时候也去调用popstate事件，所以我们用 里面的state来隔离一下。</p>
+<p>然后就是跳转的动效了，我把页面分成了两级，菜单导航的页面都是一级，博客页面都是二级，这里只说一级页面之间的跳转样式。</p>
+<p>每一个模块都有一个model，一级页面跳转需要两步，第一步是隐藏当前的model，第二部是展现要展现的model。
+所以当一级页面之间跳转的时候，buildPage方法就会调hide.XXX 方法，hide.XXX根据模块的不同，做一些不同的更改，在同一调用hideLevel_1方法。完成hide操作，同时调用show.XXX事件，完成show的操作。</p>
+<p>每一个模块还有一个type，因为这些菜单有两种展现形式，一种是在蒙版上弹出（如随笔模块），另一种是在蒙版全部盖住屏幕时候进行更换（如css模块）。
+这时候会把内容存放在两个不同的内容区域里，我把它们取名为 top 和bottom。</p>
+<p>css模块代码示例：</p>
+<pre><code>.on(&#39;show.css&#39;,function (e) {
+    var delay = 0;
+    showLevel_1(e.l_state,e.n_state,delay);
+})
+.on(&#39;hide.css&#39;,function (e) {
+    var delay = 0; 
+    hideLevel_1(e.l_state,e.n_state,delay);
+})
+
+而随笔模块，需要在事件中做一些改变：
+// essay    
+.on(&#39;show.essay&#39;,function (e) {
+    var delay = 0, n_state = e.n_state;
+    n_state[&#39;type&#39;] = &#39;top&#39;;
+    showLevel_1(e.l_state,n_state,delay);
+})
+.on(&#39;hide.essay&#39;,function (e) {
+    var delay = 500, l_state = e.l_state;
+    l_state[&#39;type&#39;] = &#39;top&#39;;
+    hideLevel_1(l_state,e.n_state,delay);
+})
+</code></pre><p>这样，就可以对一些差异进行补充以及矫正。</p>
+<p>然后是动画效果中的蒙版，css代码如下：</p>
+<pre><code>/* 前方蒙版 */
+@fullScreen-delay:95ms;
+.full-screen{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2; display:none;
+    &gt;li{width:100%;height:10%;transition:400ms; background-repeat:no-repeat;background-size:100% 1000%; 
+        transform:rotateX(90deg);
+        &amp;:nth-child(1){transition-delay:@fullScreen-delay*1;background-position:0 0;}
+        &amp;:nth-child(2){transition-delay:@fullScreen-delay*2;background-position:0 11.1%}
+        &amp;:nth-child(3){transition-delay:@fullScreen-delay*3;background-position:0 22.2%;}
+        &amp;:nth-child(4){transition-delay:@fullScreen-delay*4;background-position:0 33.3%;}
+        &amp;:nth-child(5){transition-delay:@fullScreen-delay*5;background-position:0 44.4%;}
+        &amp;:nth-child(6){transition-delay:@fullScreen-delay*6;background-position:0 55.5%;}
+        &amp;:nth-child(7){transition-delay:@fullScreen-delay*7;background-position:0 66.6%;}
+        &amp;:nth-child(8){transition-delay:@fullScreen-delay*8;background-position:0 77.7%;}
+        &amp;:nth-child(9){transition-delay:@fullScreen-delay*9;background-position:0 88.8%;}
+        &amp;:nth-child(10){transition-delay:@fullScreen-delay*10;background-position:0 99.9%;}
+    }
+    &amp;.current &gt;li{transform:none;}      
+}
+.index .full-screen &gt;li{background-color:@color0;background-image:url(../images/index-background.jpg)}
+</code></pre><p>通过background-position 把背景图片分成十块，然后用transform做翻转，就可以行程效果了。
+注意一下分成十块你要用100除以9··· 原谅我数学不好，还是不明白为什么···</p>
+<p>大概菜单的跳转就这么多，主要就是对pushstate的应用，以及jquery中on和trigger的运用.</p>
+<p></fromone-main></p>
+</div><div class="mainbody-comment"></div></section></div></div></div></div>
+		<ul class="full-screen">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="loading-area">
+			<div class="spinner">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>	
+				<div></div>
+				<div></div>
+				<aside>loading</aside>
+			</div>
+		</div>
+		<div class="modal-area">
+			<div class="modal-box">
+			     <!-- <iframe src="https://changyan.sohu.com/api/oauth2/authorize?client_id=cyrCA2YHb&redirect_uri=http://yansm.github.io/fromone/checkOAUTH.html&response_type=code&platform_id=3"> -->
+			</div>
+		</div>
+	</body>
+	
+</html>
+    
